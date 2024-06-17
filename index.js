@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./model/User.js");
-
+const cookieparser = require("cookie-parser");
 const { DBConnection } = require("./database/db.js");
 
 DBConnection();
@@ -49,6 +49,42 @@ app.post("/register", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Serverrr Error", error: error });
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!(email && password)) {
+      return res.status(400).json({ message: "Please fill all the fields" });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+    const token = jwt.sign({ id: user._id, email }, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
+    user.token = token;
+    user.password = undefined;
+
+    const options = {
+      expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
+
+    res.status(200).cookie("token", token, options).json({
+      message: "successfully logged in",
+      success: true,
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error", error: error });
   }
 });
 
