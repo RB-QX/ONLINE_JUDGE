@@ -6,7 +6,9 @@ const jwt = require("jsonwebtoken");
 const User = require("./model/User.js");
 const cookieparser = require("cookie-parser");
 const { DBConnection } = require("./database/db.js");
+const cors = require("cors");
 
+app.use(cors());
 DBConnection();
 
 app.use(express.json());
