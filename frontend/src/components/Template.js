@@ -11,11 +11,11 @@ const Template = ({ title, desc1, desc2, formtype, setIsLoggedIn }) => {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Example</title>
+  <title>ONLINE JUDGE</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Hello, World!</h1>
+  <h1>wELCOE TO OJ!</h1>
 </body>
 </html>
 `;
@@ -23,7 +23,7 @@ const Template = ({ title, desc1, desc2, formtype, setIsLoggedIn }) => {
   return (
     <div className="flex flex-col lg:flex-row justify-between w-11/12 max-w-[1160px] py-12 mx-auto gap-12 md:flex-row">
       <div className="w-full lg:w-5/12 max-w-[450px]">
-        <h1 className="text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem]">
+        <h1 className=" text-yellow-500 font-semibold text-[1.875rem] leading-[2.375rem]">
           {title}
         </h1>
         <p className="text-[1.125rem] leading-[1.625rem] mt-4">
