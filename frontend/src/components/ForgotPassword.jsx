@@ -17,10 +17,11 @@ function ForgotPassword() {
       .then((res) => res.json())
       .then((data) => {
         if (data.Status === "Success") {
+          console.log("email send");
           navigate("/login");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error in forgot password"));
   };
 
   return (

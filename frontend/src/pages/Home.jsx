@@ -1,4 +1,7 @@
 import React from "react";
+import ProblemsPage from "./ProblemsPage";
+
+import CompilerPage from "./CompilerPage";
 
 const Home = ({ isLoggedIn }) => {
   return (
@@ -161,7 +164,8 @@ const Home = ({ isLoggedIn }) => {
             </div>
           </div>
         </section>
-
+        {/* <ProblemsPage />
+        <CompilerPage /> */}
         {/* How it Works */}
         <section className="mb-12">
           <h2 className="text-3xl text-yellow-400 font-semibold mb-6">
@@ -247,7 +251,7 @@ const Home = ({ isLoggedIn }) => {
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2024 DSA Problem Solver. All rights reserved.</p>
           <div className="mt-2">
-            <a href="#" className="text-blue-500 hover:text-blue-600 px-2">
+            <a className="text-blue-500 hover:text-blue-600 px-2">
               Privacy Policy
             </a>
             <span className="text-gray-400">|</span>

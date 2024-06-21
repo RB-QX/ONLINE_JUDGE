@@ -9,6 +9,9 @@ import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+
+import ProblemsPage from "./pages/ProblemsPage";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -26,6 +29,7 @@ function App() {
           path="/register"
           element={<Signup setIsLoggedIn={setIsLoggedIn} />}
         />
+        <Route path="/problems" element={<ProblemsPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
           path="/reset_password/:id/:token"
