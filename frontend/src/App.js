@@ -9,14 +9,14 @@ import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
-
+import ProblemsPage from "./pages/ProblemsPage";
 import AddProblemForm from "./components/AddProblemForm";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <div className="w-screen h-screen bg-richblack-900 flex flex-col">
+    <div className="w-screen h-auto bg-richblack-900 flex flex-col">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Routes>
@@ -30,6 +30,7 @@ function App() {
           element={<Signup setIsLoggedIn={setIsLoggedIn} />}
         />
         <Route path="/addproblems" element={<AddProblemForm />} />
+        <Route path="/allproblems" element={<ProblemsPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
           path="/reset_password/:id/:token"

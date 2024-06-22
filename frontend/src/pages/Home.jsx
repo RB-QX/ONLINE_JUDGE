@@ -1,8 +1,5 @@
 import React from "react";
-import ProblemsPage from "./ProblemsPage";
-
-import CompilerPage from "./CompilerPage";
-
+import { Link } from "react-router-dom";
 const Home = ({ isLoggedIn }) => {
   return (
     // <div className=" bg-richblack-900 ">
@@ -123,7 +120,7 @@ const Home = ({ isLoggedIn }) => {
     //     </div>
     //   </footer>
     // </div>
-    <div className=" bg-richblack-800">
+    <div className=" bg-richblack-800 w-auto ">
       {/* Header */}
 
       {/* Main Content */}
@@ -233,9 +230,11 @@ const Home = ({ isLoggedIn }) => {
         <section className="text-center">
           <h2 className="text-3xl font-semibold mb-6">Get Started Today</h2>
           <div className="flex justify-center space-x-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md transition duration-300">
-              Sign Up / Log In
-            </button>
+            <Link to="/register">
+              <button className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md transition duration-300">
+                Sign Up / Log In
+              </button>
+            </Link>
             <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-6 rounded-lg shadow-md transition duration-300">
               Explore Problems
             </button>
@@ -251,15 +250,24 @@ const Home = ({ isLoggedIn }) => {
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2024 DSA Problem Solver. All rights reserved.</p>
           <div className="mt-2">
-            <a className="text-blue-500 hover:text-blue-600 px-2">
+            <a
+              href="/register"
+              className="text-blue-500 hover:text-blue-600 px-2"
+            >
               Privacy Policy
             </a>
             <span className="text-gray-400">|</span>
-            <a href="#" className="text-blue-500 hover:text-blue-600 px-2">
+            <a
+              href="/register"
+              className="text-blue-500 hover:text-blue-600 px-2"
+            >
               Terms of Service
             </a>
             <span className="text-gray-400">|</span>
-            <a href="#" className="text-blue-500 hover:text-blue-600 px-2">
+            <a
+              href="/register"
+              className="text-blue-500 hover:text-blue-600 px-2"
+            >
               Contact Us
             </a>
           </div>

@@ -10,12 +10,11 @@ const AddProblemForm = () => {
   const [testCases, setTestCases] = useState([{ input: "", output: "" }]);
 
   const handleTestCaseChange = (index, event) => {
-    const newTestCases = testCases.map((testCase, i) => {
-      if (i === index) {
-        return { ...testCase, [event.target.name]: event.target.value };
-      }
-      return testCase;
-    });
+    const newTestCases = testCases.map((testCase, i) =>
+      i === index
+        ? { ...testCase, [event.target.name]: event.target.value }
+        : testCase
+    );
     setTestCases(newTestCases);
   };
 
@@ -65,9 +64,9 @@ const AddProblemForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg"
+      className="mx-auto w-6/12 p-6 bg-yellow-100 shadow-lg rounded-lg"
     >
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
+      <h1 className="text-3xl  font-bold mb-6 text-center text-blue-600">
         Add New Problem
       </h1>
       <div className="mb-4">
@@ -90,6 +89,7 @@ const AddProblemForm = () => {
           onChange={(e) => setDescription(e.target.value)}
           className="mt-1 block w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Description"
+          rows={4}
           required
         />
       </div>
@@ -100,7 +100,7 @@ const AddProblemForm = () => {
         <select
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
-          className="mt-1 block w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-1 block w-full p-3 border bg-white-500 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="Easy">Easy</option>
           <option value="Medium">Medium</option>
@@ -142,6 +142,7 @@ const AddProblemForm = () => {
           onChange={(e) => setConstraints(e.target.value)}
           className="mt-1 block w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Constraints"
+          rows={4}
           required
         />
       </div>
@@ -159,7 +160,7 @@ const AddProblemForm = () => {
               name="input"
               value={testCase.input}
               onChange={(e) => handleTestCaseChange(index, e)}
-              className="mt-1 block w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Test Case Input"
               required
             />
