@@ -23,6 +23,30 @@ app.get("/", (req, res) => {
   res.send("Hello World to onlinejudge");
 });
 
+app.listen(8000, () => {
+  console.log("Server is running on port 8000");
+});
+
+// app.post("/reset-password/:id/:token", (req, res) => {
+//   const { id, token } = req.params;
+//   const { password } = req.body;
+
+//   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+//     if (err) {
+//       return res.json({ Status: "Error with token" });
+//     } else {
+//       bcrypt
+//         .hash(password, 10)
+//         .then((hash) => {
+//           User.findByIdAndUpdate({ _id: id }, { password: hash })
+//             .then((u) => res.send({ Status: "Success" }))
+//             .catch((err) => res.send({ Status: err }));
+//         })
+//         .catch((err) => res.send({ Status: err }));
+//     }
+//   });
+// });
+
 // app.post("/register", async (req, res) => {
 //   console.log(req.body);
 //   try {
@@ -127,29 +151,5 @@ app.get("/", (req, res) => {
 //         console.log("Email sent: " + info.response);
 //       }
 //     });
-//   });
-// });
-
-app.listen(8000, () => {
-  console.log("Server is running on port 8000");
-});
-
-// app.post("/reset-password/:id/:token", (req, res) => {
-//   const { id, token } = req.params;
-//   const { password } = req.body;
-
-//   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-//     if (err) {
-//       return res.json({ Status: "Error with token" });
-//     } else {
-//       bcrypt
-//         .hash(password, 10)
-//         .then((hash) => {
-//           User.findByIdAndUpdate({ _id: id }, { password: hash })
-//             .then((u) => res.send({ Status: "Success" }))
-//             .catch((err) => res.send({ Status: err }));
-//         })
-//         .catch((err) => res.send({ Status: err }));
-//     }
 //   });
 // });

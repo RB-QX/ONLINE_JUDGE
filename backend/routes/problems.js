@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Problem = require("../model/Problem");
+const isAuthenticated = require("../middlewares/auth");
+const { isAdmin } = require("../middlewares/role");
 
 // POST /api/problems
-router.post("/problems", async (req, res) => {
+router.post("/addproblems", async (req, res) => {
   const {
     title,
     description,
@@ -44,7 +46,7 @@ router.post("/problems", async (req, res) => {
   }
 });
 
-router.get("/problems", async (req, res) => {
+router.get("/allproblems", isAuthenticated, isAdmin, async (req, res) => {
   try {
     const problems = await Problem.find();
     res.json(problems);
@@ -53,7 +55,6 @@ router.get("/problems", async (req, res) => {
   }
 });
 
-// Route to get problems by difficulty
 router.get("/problemsdifficulty", async (req, res) => {
   try {
     const { difficulty } = req.query;
@@ -69,3 +70,26 @@ router.get("/problemsdifficulty", async (req, res) => {
 });
 
 module.exports = router;
+
+// // Import the required modules
+// const express = require("express");
+
+// const router = express.Router();
+
+// const {
+//   addproblem,
+//   getproblem,
+//   getproblemdifficulty,
+// } = require("../controller/Problem");
+
+// // Route for add problem
+// router.post("/addproblems", addproblem);
+
+// // Route for get all problem
+// router.post("/allproblems", getproblem);
+
+// // Route for get problem based on difficulties
+// router.post("/problemsdifficulty", getproblemdifficulty);
+
+// // Export the router for use in the main application
+// module.exports = router;
