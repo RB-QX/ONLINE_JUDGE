@@ -6,7 +6,7 @@ const ProblemsPage = () => {
 
   useEffect(() => {
     const fetchProblems = async () => {
-      let url = "http://localhost:8000/problems";
+      let url = "http://localhost:8000/addproblems";
       if (difficulty) {
         url = `http://localhost:8000/problemsdifficulty?difficulty=${difficulty}`;
       }
@@ -32,53 +32,55 @@ const ProblemsPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 text-black-400 ">
-      <h1 className="text-3xl font-bold mb-4">Problems</h1>
+    <div className="bg-yellow-100 w-full height-full">
+      <div className="container mx-auto px-4 py-8 text-black-400">
+        <h1 className="text-3xl font-bold mb-4">Problems</h1>
 
-      <div className="mb-4">
-        <label
-          htmlFor="difficulty"
-          className="block text-sm font-medium text-yellow-600"
-        >
-          Filter by Difficulty:
-        </label>
-        <select
-          id="difficulty"
-          value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-          className="mt-1 block w-50 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-        >
-          <option value="">All</option>
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-      </div>
+        <div className="mb-4">
+          <label
+            htmlFor="difficulty"
+            className="block text-sm font-medium text-yellow-600"
+          >
+            Filter by Difficulty:
+          </label>
+          <select
+            id="difficulty"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+            className="mt-1 block w-50 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          >
+            <option value="">All</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
 
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead className="bg-richblack-900">
-          <tr>
-            <th className="py-2 px-4 border-b">Title</th>
-            <th className="py-2 px-4 border-b">Description</th>
-            <th className="py-2 px-4 border-b">Difficulty</th>
-          </tr>
-        </thead>
-        <tbody>
-          {problems.map((problem) => (
-            <tr key={problem._id} className="border-b">
-              <td className="py-2 px-4">{problem.title}</td>
-              <td className="py-2 px-4">{problem.description}</td>
-              <td
-                className={`py-2 px-4 ${getDifficultyColor(
-                  problem.difficulty
-                )}`}
-              >
-                {problem.difficulty}
-              </td>
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead className="bg-yellow-200">
+            <tr>
+              <th className="py-2 px-4 border-b">Title</th>
+              <th className="py-2 px-4 border-b">Description</th>
+              <th className="py-2 px-4 border-b">Difficulty</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {problems.map((problem) => (
+              <tr key={problem._id} className="border-b">
+                <td className="py-2 px-4">{problem.title}</td>
+                <td className="py-2 px-4">{problem.description}</td>
+                <td
+                  className={`py-2 px-4 ${getDifficultyColor(
+                    problem.difficulty
+                  )}`}
+                >
+                  {problem.difficulty}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

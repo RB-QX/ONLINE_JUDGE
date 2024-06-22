@@ -39,6 +39,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
       if (response.ok) {
         setIsLoggedIn(true);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
         toast.success("Logged In Successfully");
         console.log("Login successful: ", data);
         navigate("/dashboard");

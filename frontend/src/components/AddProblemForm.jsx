@@ -35,7 +35,7 @@ const AddProblemForm = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/problems", {
+      const response = await fetch("http://localhost:8000/addproblems", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

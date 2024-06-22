@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 const Navbar = (props) => {
   let isLoggedIn = props.isLoggedIn;
   let setIsLoggedIn = props.setIsLoggedIn;
-
+  let userRole = localStorage.getItem("role");
   return (
     <div className="flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto">
       <Link to="/">
@@ -24,9 +24,11 @@ const Navbar = (props) => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/addproblems">AddProblems</Link>
-          </li>
+          {isLoggedIn && userRole === "admin" && (
+            <li>
+              <Link to="/addproblems">AddProblems</Link>
+            </li>
+          )}
           <li>
             <Link to="/allproblems">Problem</Link>
           </li>
