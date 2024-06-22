@@ -44,4 +44,28 @@ router.post("/problems", async (req, res) => {
   }
 });
 
+router.get("/problems", async (req, res) => {
+  try {
+    const problems = await Problem.find();
+    res.json(problems);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Route to get problems by difficulty
+router.get("/problemsdifficulty", async (req, res) => {
+  try {
+    const { difficulty } = req.query;
+    const query = {};
+    if (difficulty) {
+      query.difficulty = difficulty;
+    }
+    const problems = await Problem.find(query);
+    res.json(problems);
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 module.exports = router;
