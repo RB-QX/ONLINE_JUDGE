@@ -7,6 +7,16 @@ const Navbar = (props) => {
   let isLoggedIn = props.isLoggedIn;
   let setIsLoggedIn = props.setIsLoggedIn;
   let userRole = localStorage.getItem("role");
+
+  const handleLogout = () => {
+    // Clear localStorage completely
+    localStorage.clear();
+    // Set isLoggedIn state to false
+    setIsLoggedIn(false);
+    // Show logout success toast
+    toast.success("Logged Out");
+  };
+
   return (
     <div className="flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto">
       <Link to="/">
@@ -60,10 +70,7 @@ const Navbar = (props) => {
         {isLoggedIn && (
           <Link to="/">
             <button
-              onClick={() => {
-                setIsLoggedIn(false);
-                toast.success("Logged Out");
-              }}
+              onClick={handleLogout}
               className="bg-richblack-800 text-richblack-100 py-[8px] 
                     px-[12px] rounded-[8px] border border-richblack-700"
             >
@@ -71,13 +78,24 @@ const Navbar = (props) => {
             </button>
           </Link>
         )}
-        {isLoggedIn && (
+        {isLoggedIn && userRole === "admin" && (
           <Link to="/dashboard">
             <button
               className="bg-richblack-800 text-richblack-100 py-[8px] 
                     px-[12px] rounded-[8px] border border-richblack-700"
             >
               Dashboard
+            </button>
+          </Link>
+        )}
+
+        {isLoggedIn && userRole === "user" && (
+          <Link to="/dashboard">
+            <button
+              className="bg-richblack-800 text-richblack-100 py-[8px] 
+                    px-[12px] rounded-[8px] border border-richblack-700"
+            >
+              Profile
             </button>
           </Link>
         )}

@@ -29,7 +29,10 @@ function App() {
           path="/register"
           element={<Signup setIsLoggedIn={setIsLoggedIn} />}
         />
-        <Route path="/addproblems" element={<AddProblemForm />} />
+        <Route
+          path="/addproblems"
+          element={<AddProblemForm isLoggedIn={isLoggedIn} />}
+        />
         <Route path="/allproblems" element={<ProblemsPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route

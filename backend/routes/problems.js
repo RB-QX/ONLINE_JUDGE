@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Problem = require("../model/Problem");
-const isAuthenticated = require("../middlewares/auth");
-const { isAdmin } = require("../middlewares/role");
+// const { auth } = require("../middlewares/auth");
+// const { isAdmin } = require("../middlewares/role");
 
 // POST /api/problems
 router.post("/addproblems", async (req, res) => {
@@ -46,7 +46,7 @@ router.post("/addproblems", async (req, res) => {
   }
 });
 
-router.get("/allproblems", isAuthenticated, isAdmin, async (req, res) => {
+router.get("/allproblems", async (req, res) => {
   try {
     const problems = await Problem.find();
     res.json(problems);

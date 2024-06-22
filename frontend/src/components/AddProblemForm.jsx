@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddProblemForm = () => {
+const AddProblemForm = ({ isLoggedIn }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [difficulty, setDifficulty] = useState("Easy");
@@ -60,6 +60,9 @@ const AddProblemForm = () => {
       alert("Error adding problem");
     }
   };
+  if (!isLoggedIn) {
+    return <p>Please log in to add a problem.</p>;
+  }
 
   return (
     <form

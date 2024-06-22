@@ -4,7 +4,7 @@ exports.isAdmin = async (req, res, next) => {
   try {
     const userDetails = await User.findOne({ email: req.user.email });
 
-    if (userDetails.role !== "admin") {
+    if (userDetails.accountType !== "admin") {
       return res.status(401).json({
         success: false,
         message: "This is a Protected Route for Admin",
@@ -17,7 +17,6 @@ exports.isAdmin = async (req, res, next) => {
       .json({ success: false, message: `User Role Can't be Verified` });
   }
 };
-
 exports.isUser = async (req, res, next) => {
   try {
     const userDetails = await User.findOne({ email: req.user.email });
