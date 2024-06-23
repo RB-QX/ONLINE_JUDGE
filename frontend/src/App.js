@@ -10,8 +10,11 @@ import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import ProblemsPage from "./pages/ProblemsPage";
-import AddProblemForm from "./components/AddProblemForm";
-
+import AddAdminProblemForm from "./components/AddAdminProblemForm";
+import AddUserProblemForm from "./components/AddUserProblemForm";
+import PendingProblems from "./pages/PendingProblems";
+import AdminRoute from "./components/AdminRoute";
+import ProfilePage from "./pages/ProfilePage";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -29,10 +32,25 @@ function App() {
           path="/register"
           element={<Signup setIsLoggedIn={setIsLoggedIn} />}
         />
-        <Route
+        {/* <Route
           path="/addproblems"
-          element={<AddProblemForm isLoggedIn={isLoggedIn} />}
+          element={<AddAdminProblemForm isLoggedIn={isLoggedIn} />}
+        /> */}
+        <Route element={<AdminRoute isLoggedIn={isLoggedIn} />}>
+          <Route
+            path="/addproblems"
+            element={<AddAdminProblemForm isLoggedIn={isLoggedIn} />}
+          />
+        </Route>
+
+        <Route
+          path="/adduserproblems"
+          element={<AddUserProblemForm isLoggedIn={isLoggedIn} />}
         />
+        <Route element={<AdminRoute isLoggedIn={isLoggedIn} />}>
+          <Route path="/pendingproblems" element={<PendingProblems />} />
+        </Route>
+
         <Route path="/allproblems" element={<ProblemsPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
@@ -48,6 +66,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </div>
   );

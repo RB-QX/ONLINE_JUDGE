@@ -41,9 +41,14 @@ const LoginForm = ({ setIsLoggedIn }) => {
         setIsLoggedIn(true);
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
+        localStorage.setItem("email", data.email);
         toast.success("Logged In Successfully");
         console.log("Login successful: ", data);
-        navigate("/dashboard");
+        if (data.role === "admin") {
+          navigate("/dashboard"); // Assuming you're using React Router's `navigate` function
+        } else {
+          navigate("/"); // Redirect to home or another appropriate route for regular users
+        }
       } else {
         toast.error(data.message || "Login failed");
       }

@@ -71,9 +71,16 @@ const SignupForm = ({ setIsLoggedIn }) => {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
+        localStorage.setItem("email", data.email);
         setIsLoggedIn(true);
         toast.success("Account Created");
-        navigate("/dashboard");
+        if (data.role === "admin") {
+          navigate("/dashboard"); // Assuming you're using React Router's `navigate` function
+        } else {
+          navigate("/"); // Redirect to home or another appropriate route for regular users
+        }
       } else {
         toast.error(data.message || "Registration failed");
       }

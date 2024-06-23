@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddProblemForm = ({ isLoggedIn }) => {
+const AddAdminProblemForm = ({ isLoggedIn }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [difficulty, setDifficulty] = useState("Easy");
@@ -196,4 +196,4 @@ const AddProblemForm = ({ isLoggedIn }) => {
   );
 };
 
-export default AddProblemForm;
+export default AddAdminProblemForm;

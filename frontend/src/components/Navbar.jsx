@@ -39,6 +39,11 @@ const Navbar = (props) => {
               <Link to="/addproblems">AddProblems</Link>
             </li>
           )}
+          {isLoggedIn && userRole === "user" && (
+            <li>
+              <Link to="/adduserproblems">AddProblems</Link>
+            </li>
+          )}
           <li>
             <Link to="/allproblems">Problem</Link>
           </li>
@@ -90,7 +95,7 @@ const Navbar = (props) => {
         )}
 
         {isLoggedIn && userRole === "user" && (
-          <Link to="/dashboard">
+          <Link to="/profile">
             <button
               className="bg-richblack-800 text-richblack-100 py-[8px] 
                     px-[12px] rounded-[8px] border border-richblack-700"

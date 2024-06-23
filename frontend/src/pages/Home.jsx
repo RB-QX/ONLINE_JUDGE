@@ -120,7 +120,7 @@ const Home = ({ isLoggedIn }) => {
     //     </div>
     //   </footer>
     // </div>
-    <div className=" bg-richblack-800 w-auto ">
+    <div className=" bg-richblack-800   ">
       {/* Header */}
 
       {/* Main Content */}
