@@ -76,7 +76,16 @@ exports.signup = async (req, res) => {
     user.password = undefined;
 
     console.log(token);
-    res.status(200).json({ message: "Successfully registered", user });
+    res
+      .status(200)
+      .json({
+        message: "Successfully registered",
+        user,
+        success: true,
+        token,
+        role,
+        email,
+      });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error", error: error });
@@ -113,6 +122,7 @@ exports.login = async (req, res) => {
       success: true,
       token,
       role,
+      email,
     });
   } catch (error) {
     console.log(error);
@@ -174,4 +184,13 @@ exports.resetpassword = async (req, res) => {
         .catch((err) => res.send({ Status: err }));
     }
   });
+};
+
+exports.totaluser = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
 };

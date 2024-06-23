@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Problem = require("../model/Problem");
 // const { auth } = require("../middlewares/auth");
-// const { isAdmin } = require("../middlewares/role");
+const { isAdmin } = require("../middlewares/role");
 
 // POST /api/problems
 router.post("/addproblems", async (req, res) => {
@@ -70,6 +70,28 @@ router.get("/problemsdifficulty", async (req, res) => {
 });
 
 module.exports = router;
+
+// router.get("/problems/pending", async (req, res) => {
+//   try {
+//     const pendingProblems = await Problem.find({ status: "Pending" });
+//     res.json(pendingProblems);
+//   } catch (error) {
+//     res.status(500).json({ error: "Server error" });
+//   }
+// });
+
+// router.patch("/problems/verify/:id", async (req, res) => {
+//   try {
+//     const updatedProblem = await Problem.findByIdAndUpdate(
+//       req.params.id,
+//       { status: "Verified" },
+//       { new: true }
+//     );
+//     res.json(updatedProblem);
+//   } catch (error) {
+//     res.status(500).json({ error: "Server error" });
+//   }
+// });
 
 // // Import the required modules
 // const express = require("express");

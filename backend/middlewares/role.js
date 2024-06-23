@@ -4,7 +4,7 @@ exports.isAdmin = async (req, res, next) => {
   try {
     const userDetails = await User.findOne({ email: req.user.email });
 
-    if (userDetails.accountType !== "admin") {
+    if (userDetails.role !== "admin") {
       return res.status(401).json({
         success: false,
         message: "This is a Protected Route for Admin",
@@ -21,7 +21,7 @@ exports.isUser = async (req, res, next) => {
   try {
     const userDetails = await User.findOne({ email: req.user.email });
 
-    if (userDetails.accountType !== "user") {
+    if (userDetails.role !== "user") {
       return res.status(401).json({
         success: false,
         message: "This is a Protected Route for Students",

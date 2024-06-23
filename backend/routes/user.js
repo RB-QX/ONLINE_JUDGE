@@ -8,6 +8,7 @@ const {
   signup,
   forgotpassword,
   resetpassword,
+  totaluser,
 } = require("../controller/Auth");
 
 // Routes for Login, Signup, and Authentication
@@ -21,6 +22,7 @@ router.post("/login", login);
 
 // Route for user signup
 router.post("/register", signup);
+router.get("/totaluser", totaluser);
 
 // Route for sending OTP to the user's email
 router.post("/forgot-password", forgotpassword);
