@@ -34,6 +34,9 @@ const Navbar = (props) => {
           <li>
             <Link to="/">Home</Link>
           </li>
+          <li>
+            <Link to="/compiler">Compiler</Link>
+          </li>
           {isLoggedIn && userRole === "admin" && (
             <li>
               <Link to="/addproblems">AddProblems</Link>

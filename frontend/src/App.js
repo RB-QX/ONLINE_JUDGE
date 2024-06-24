@@ -15,6 +15,7 @@ import AddUserProblemForm from "./components/AddUserProblemForm";
 import PendingProblems from "./pages/PendingProblems";
 import AdminRoute from "./components/AdminRoute";
 import ProfilePage from "./pages/ProfilePage";
+import CodeEditor from "./components/compiler/CodeEditor";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -24,6 +25,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+        <Route path="/compiler" element={<CodeEditor />} />
         <Route
           path="/login"
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
