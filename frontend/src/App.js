@@ -16,6 +16,7 @@ import PendingProblems from "./pages/PendingProblems";
 import AdminRoute from "./components/AdminRoute";
 import ProfilePage from "./pages/ProfilePage";
 import CodeEditor from "./components/compiler/CodeEditor";
+import SpecificPage from "./pages/SpecificPage";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -59,7 +60,7 @@ function App() {
           path="/reset_password/:id/:token"
           element={<ResetPassword />}
         ></Route>
-
+        <Route path="/problems/:id/" element={<SpecificPage />}></Route>
         <Route
           path="/dashboard"
           element={

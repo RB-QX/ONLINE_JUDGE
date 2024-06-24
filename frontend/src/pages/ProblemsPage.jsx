@@ -6,13 +6,22 @@
 
 //   useEffect(() => {
 //     const fetchProblems = async () => {
-//       let url = "http://localhost:8000/addproblems";
+//       let url = "http://localhost:8000/allproblems";
 //       if (difficulty) {
 //         url = `http://localhost:8000/problemsdifficulty?difficulty=${difficulty}`;
 //       }
-//       const response = await fetch(url);
-//       const data = await response.json();
-//       setProblems(data);
+//       try {
+//         const response = await fetch(url);
+//         if (response.ok) {
+//           const data = await response.json();
+//           setProblems(data);
+//         } else {
+//           throw new Error("Failed to fetch problems");
+//         }
+//       } catch (error) {
+//         console.error("Error fetching problems:", error);
+//         // Handle error as needed, e.g., show an error message to the user
+//       }
 //     };
 
 //     fetchProblems();
@@ -32,7 +41,7 @@
 //   };
 
 //   return (
-//     <div className="bg-yellow-100 w-full height-full">
+//     <div className="bg-yellow-100 w-full min-h-screen">
 //       <div className="container mx-auto px-4 py-8 text-black-400">
 //         <h1 className="text-3xl font-bold mb-4">Problems</h1>
 
@@ -87,9 +96,8 @@
 
 // export default ProblemsPage;
 
-// //http://localhost:8000/problems
-
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const ProblemsPage = () => {
   const [problems, setProblems] = useState([]);
@@ -167,7 +175,14 @@ const ProblemsPage = () => {
           <tbody>
             {problems.map((problem) => (
               <tr key={problem._id} className="border-b">
-                <td className="py-2 px-4">{problem.title}</td>
+                <td className="py-2 px-4">
+                  <Link
+                    to={`/problems/${problem._id}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {problem.title}
+                  </Link>
+                </td>
                 <td className="py-2 px-4">{problem.description}</td>
                 <td
                   className={`py-2 px-4 ${getDifficultyColor(
