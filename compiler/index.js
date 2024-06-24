@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const { generateFile } = require("./generateFile");
 const { executeCpp } = require("./executeCpp.js");
+const { executePython } = require("./executePython.js");
 const cors = require("cors");
 
 //middlewares
@@ -14,8 +15,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/run", async (req, res) => {
-  // const language = req.body.language;
-  // const code = req.body.code;
+  //   const language = req.body.language;
+  //   const code = req.body.code;
 
   const { language = "cpp", code } = req.body;
   if (code === undefined) {
@@ -23,13 +24,20 @@ app.post("/run", async (req, res) => {
   }
   try {
     const filePath = await generateFile(language, code);
-    const output = await executeCpp(filePath);
+    // const output = await executeCpp(filePath);
+    let output;
+    if (language === "cpp") {
+      output = await executeCpp(filePath);
+    } else {
+      output = await executePython(filePath);
+    }
+
     res.json({ filePath, output });
   } catch (error) {
     res.status(500).json({ error: error });
   }
 });
 
-app.listen(8000, () => {
-  console.log("Server is listening on port 8000!");
+app.listen(5000, () => {
+  console.log("Server is listening on port 5000!");
 });
