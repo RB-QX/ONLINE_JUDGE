@@ -42,6 +42,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
         localStorage.setItem("email", data.email);
+        localStorage.setItem("userId", data.userid);
         toast.success("Logged In Successfully");
         console.log("Login successful: ", data);
         if (data.role === "admin") {

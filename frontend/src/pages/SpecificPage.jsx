@@ -113,6 +113,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CodeEditor from "../components/compiler/CodeEditor";
+const userId = localStorage.getItem("userId");
 
 const SpecificPage = () => {
   const { id } = useParams(); // Get the problem ID from URL params
@@ -213,7 +214,7 @@ const SpecificPage = () => {
         </div>
       </div>
       <div className="w-full lg:w-1/2 pl-0 lg:pl-8">
-        <CodeEditor />
+        <CodeEditor problemId={id} userId={userId} />
       </div>
     </div>
   );
