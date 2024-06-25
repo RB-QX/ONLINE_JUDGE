@@ -10,7 +10,6 @@ const cors = require("cors");
 const userRoutes = require("./routes/user");
 const problemsRoutes = require("./routes/problems");
 const adduserproblemRoutes = require("./routes/adduserproblem");
-const code = require("./routes/code");
 app.use(cors());
 DBConnection();
 
@@ -20,7 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", userRoutes);
 app.use("/", problemsRoutes);
 app.use("/", adduserproblemRoutes);
-app.use("/", code);
 
 app.get("/", (req, res) => {
   res.send("Hello World to onlinejudge");
