@@ -125,6 +125,7 @@ exports.login = async (req, res) => {
       token,
       role,
       email,
+      userId: user_id,
     });
   } catch (error) {
     console.log(error);
