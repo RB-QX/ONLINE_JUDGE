@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User.js");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+
+dotenv.config();
 //const cookieparser = require("cookie-parser");
 
 // exports.signup = async (req, res) => {
@@ -76,16 +80,14 @@ exports.signup = async (req, res) => {
     user.password = undefined;
 
     console.log(token);
-    res
-      .status(200)
-      .json({
-        message: "Successfully registered",
-        user,
-        success: true,
-        token,
-        role,
-        email,
-      });
+    res.status(200).json({
+      message: "Successfully registered",
+      user,
+      success: true,
+      token,
+      role,
+      email,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error", error: error });
@@ -130,38 +132,80 @@ exports.login = async (req, res) => {
   }
 };
 
+// exports.forgotpassword = async (req, res) => {
+//   const { email } = req.body;
+//   User.findOne({ email: email }).then((user) => {
+//     if (!user) {
+//       return res.send({ Status: "User not existed" });
+//     }
+//     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
+//       expiresIn: "1d",
+//     });
+//     var transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: "riturajprasad2412@gmail.com",
+//         pass: "zxqewvrkkwcfvftg",
+//       },
+//     });
+
+//     var mailOptions = {
+//       from: "riturajprasad2412@gmail.com",
+//       to: email,
+//       subject: "Reset Password Link",
+//       text: `http://localhost:3000/reset_password/${user._id}/${token}`,
+//     };
+
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log("Email sent: " + info.response);
+//       }
+//     });
+//   });
+// };
+
 exports.forgotpassword = async (req, res) => {
   const { email } = req.body;
-  User.findOne({ email: email }).then((user) => {
+
+  try {
+    const user = await User.findOne({ email });
     if (!user) {
-      return res.send({ Status: "User not existed" });
+      return res.status(404).json({ status: "User not found" });
     }
+
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
       expiresIn: "1d",
     });
-    var transporter = nodemailer.createTransport({
+
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "riturajprasad2412@gmail.com",
-        pass: "zxqewvrkkwcfvftg",
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
-    var mailOptions = {
-      from: "riturajprasad2412@gmail.com",
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
       to: email,
       subject: "Reset Password Link",
-      text: `http://localhost:3000/reset_password/${user._id}/${token}`,
+      text: `Click the following link to reset your password: http://localhost:8000/reset_password/${user._id}/${token}`,
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
+        console.error("Error sending email:", error);
+        return res.status(500).json({ status: "Failed to send email" });
       }
+      console.log("Email sent:", info.response);
+      return res.status(200).json({ status: "Email sent successfully" });
     });
-  });
+  } catch (error) {
+    console.error("Error in forgot password:", error);
+    return res.status(500).json({ status: "Failed to process request" });
+  }
 };
 
 //"/reset-password/:id/:token"
@@ -172,6 +216,7 @@ exports.resetpassword = async (req, res) => {
 
   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
+      console.log("dfghjk");
       return res.json({ Status: "Error with token" });
     } else {
       bcrypt
