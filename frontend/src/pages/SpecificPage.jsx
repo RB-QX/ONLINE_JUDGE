@@ -113,14 +113,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CodeEditor from "../components/compiler/CodeEditor";
-const userId = localStorage.getItem("userId");
 
 const SpecificPage = () => {
   const { id } = useParams(); // Get the problem ID from URL params
   const [problem, setProblem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     const fetchProblem = async () => {
       try {

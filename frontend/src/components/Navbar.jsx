@@ -42,6 +42,12 @@ const Navbar = (props) => {
               <Link to="/addproblems">AddProblems</Link>
             </li>
           )}
+          {isLoggedIn && userRole === "admin" && (
+            <li>
+              <Link to="/deleteproblems">Update and Delete</Link>
+            </li>
+          )}
+
           {isLoggedIn && userRole === "user" && (
             <li>
               <Link to="/adduserproblems">AddProblems</Link>

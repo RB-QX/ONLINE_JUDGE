@@ -17,6 +17,8 @@ import AdminRoute from "./components/AdminRoute";
 import ProfilePage from "./pages/ProfilePage";
 import CodeEditor from "./components/compiler/CodeEditor";
 import SpecificPage from "./pages/SpecificPage";
+import DeleteProblem from "./components/DeleteProblemPage";
+import UpdateProblem from "./pages/UpdatePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +46,18 @@ function App() {
           <Route
             path="/addproblems"
             element={<AddAdminProblemForm isLoggedIn={isLoggedIn} />}
+          />
+        </Route>
+        <Route element={<AdminRoute isLoggedIn={isLoggedIn} />}>
+          <Route
+            path="/deleteproblems"
+            element={<DeleteProblem isLoggedIn={isLoggedIn} />}
+          />
+        </Route>
+        <Route element={<AdminRoute isLoggedIn={isLoggedIn} />}>
+          <Route
+            path="/update/:id"
+            element={<UpdateProblem isLoggedIn={isLoggedIn} />}
           />
         </Route>
 
