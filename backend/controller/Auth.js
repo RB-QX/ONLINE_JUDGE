@@ -114,6 +114,7 @@ exports.login = async (req, res) => {
     user.token = token;
     user.password = undefined;
     const role = user.role;
+
     const options = {
       expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
       httpOnly: true,
@@ -125,7 +126,7 @@ exports.login = async (req, res) => {
       token,
       role,
       email,
-      userId: user_id,
+      userId: user._id,
     });
   } catch (error) {
     console.log(error);

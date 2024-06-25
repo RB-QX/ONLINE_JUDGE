@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Problem = require("../model/Problem");
-// const { auth } = require("../middlewares/auth");
+//const { auth } = require("../middlewares/auth");
 const { isAdmin } = require("../middlewares/role");
 
 // POST /api/problems
@@ -70,7 +70,9 @@ router.get("/problemsdifficulty", async (req, res) => {
 });
 router.get("/allproblems/:id", async (req, res) => {
   try {
-    const problem = await Problem.findById(req.params.id);
+    const id = req.params.id.trim(); // Trim any leading/trailing whitespace
+
+    const problem = await Problem.findById(id);
     if (!problem) {
       return res.status(404).json({ message: "Problem not found" });
     }
@@ -78,6 +80,50 @@ router.get("/allproblems/:id", async (req, res) => {
   } catch (error) {
     console.error("Error fetching problem:", error);
     res.status(500).json({ message: "Failed to fetch problem" });
+  }
+});
+
+// Delete problem by ID
+router.delete("/allproblems/:id", async (req, res) => {
+  try {
+    const problem = await Problem.findByIdAndDelete(req.params.id);
+    if (!problem) {
+      return res.status(404).json({ message: "Problem not found" });
+    }
+    res.status(200).json({ message: "Problem deleted successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error deleting problem", error: error.message });
+  }
+});
+// Update problem details by ID
+router.put("/allproblems/:id", async (req, res) => {
+  try {
+    const problem = await Problem.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!problem) {
+      return res.status(404).json({ message: "Problem not found" });
+    }
+    res.status(200).json(problem);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating problem", error: error.message });
+  }
+});
+
+router.delete("/delete-problem/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Problem.findByIdAndDelete(id);
+    res.status(200).json({ message: "Problem deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting problem:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to delete problem", error: error.message });
   }
 });
 

@@ -52,16 +52,7 @@ exports.getproblem = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-// router.get("/problems", async (req, res) => {
-//   try {
-//     const problems = await Problem.find();
-//     res.json(problems);
-//   } catch (error) {
-//     res.status(500).json({ message: "Server error" });
-//   }
-// });
 
-// Route to get problems by difficulty
 exports.getproblemdifficulty = async (req, res) => {
   try {
     const { difficulty } = req.query;
@@ -76,15 +67,15 @@ exports.getproblemdifficulty = async (req, res) => {
   }
 };
 
-// router.get("/:id", async (req, res) => {
-//   try {
-//     const problem = await Problem.findById(req.params.id);
-//     if (!problem) {
-//       return res.status(404).json({ message: "Problem not found" });
-//     }
-//     res.json(problem);
-//   } catch (error) {
-//     console.error("Error fetching problem:", error);
-//     res.status(500).json({ message: "Failed to fetch problem" });
-//   }
-// });
+exports.deleteproblem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Problem.findByIdAndDelete(id);
+    res.status(200).json({ message: "Problem deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting problem:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to delete problem", error: error.message });
+  }
+};
