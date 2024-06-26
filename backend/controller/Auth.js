@@ -193,7 +193,9 @@ exports.forgotpassword = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Reset Password Link",
-      text: `Click the following link to reset your password: http://localhost:8000/reset_password/${user._id}/${token}`,
+      //text: `Click the following link to reset your password: http://localhost:8000/reset_password/${user._id}/${token}`,
+      html: `<p>You requested a password reset</p>
+      <p>Click this <a href="http://localhost:3000/reset-password/${user._id}/${token}">link</a> to reset your password</p>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -202,7 +204,7 @@ exports.forgotpassword = async (req, res) => {
         return res.status(500).json({ status: "Failed to send email" });
       }
       console.log("Email sent:", info.response);
-      return res.status(200).json({ status: "Email sent successfully" });
+      return res.status(200).json({ status: "Success" });
     });
   } catch (error) {
     console.error("Error in forgot password:", error);

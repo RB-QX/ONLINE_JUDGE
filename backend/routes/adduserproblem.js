@@ -1,7 +1,7 @@
 // Import the required modules
 const express = require("express");
 const router = express.Router();
-//const authMiddleware = require("../middlewares/auth");
+const authMiddleware = require("../middlewares/auth");
 const {
   adduserproblems,
   alluserproblems,
@@ -9,7 +9,7 @@ const {
   rejectproblem,
 } = require("../controller/UserProblem");
 
-router.post("/adduserproblem", adduserproblems);
+router.post("/adduserproblem", authMiddleware, adduserproblems);
 
 router.get("/allpendinguserproblems", alluserproblems);
 

@@ -28,12 +28,15 @@ app.post("/run", async (req, res) => {
     let output;
     if (language === "cpp") {
       output = await executeCpp(filePath);
+    } else if (language == "java") {
+      output = await executeJava(filePath);
     } else {
       output = await executePython(filePath);
     }
 
     res.json({ filePath, output });
   } catch (error) {
+    //console.log("error is this", error.stderr);
     res.status(500).json({ error: error });
   }
 });

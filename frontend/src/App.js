@@ -15,7 +15,8 @@ import AddUserProblemForm from "./components/AddUserProblemForm";
 import PendingProblems from "./pages/PendingProblems";
 import AdminRoute from "./components/AdminRoute";
 import ProfilePage from "./pages/ProfilePage";
-import CodeEditor from "./components/compiler/CodeEditor";
+// import CodeEditor from "./components/compiler/CodeEditor";
+import NormalCodeEditor from "./components/compiler/NormalCodeEditor";
 import SpecificPage from "./pages/SpecificPage";
 import DeleteProblem from "./components/DeleteProblemPage";
 import UpdateProblem from "./pages/UpdatePage";
@@ -29,7 +30,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
-        <Route path="/compiler" element={<CodeEditor />} />
+        <Route path="/compiler" element={<NormalCodeEditor />} />
         <Route
           path="/login"
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
@@ -72,7 +73,7 @@ function App() {
         <Route path="/allproblems" element={<ProblemsPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
-          path="/reset_password/:id/:token"
+          path="/reset-password/:id/:token"
           element={<ResetPassword />}
         ></Route>
 
