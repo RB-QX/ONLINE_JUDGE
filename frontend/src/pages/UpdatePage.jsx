@@ -280,6 +280,7 @@ const UpdateProblem = () => {
     title: "",
     description: "",
     difficulty: "",
+    topics: "",
     inputExample: "",
     outputExample: "",
     constraints: "",
@@ -404,6 +405,23 @@ const UpdateProblem = () => {
             required
           />
         </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="topics"
+          >
+            Topics
+          </label>
+          <input
+            id="topics"
+            type="text"
+            value={problem.topics}
+            onChange={(e) => setProblem({ ...problem, topics: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+
         <div className="mb-6">
           <label
             className="block text-black text-sm font-bold mb-2"

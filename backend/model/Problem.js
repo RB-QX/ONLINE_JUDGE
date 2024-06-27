@@ -33,6 +33,10 @@ const ProblemSchema = new Schema({
       output: String,
     },
   ],
+  topics: {
+    type: [String],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Problem", ProblemSchema);

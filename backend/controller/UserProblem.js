@@ -13,6 +13,7 @@ exports.adduserproblems = async (req, res) => {
     outputExample,
     constraints,
     testCases,
+    topics,
   } = req.body;
 
   if (
@@ -22,7 +23,8 @@ exports.adduserproblems = async (req, res) => {
     !inputExample ||
     !outputExample ||
     !constraints ||
-    !testCases
+    !testCases ||
+    !topics
   ) {
     return res.status(400).json({ error: "All fields are required" });
   }
@@ -36,6 +38,7 @@ exports.adduserproblems = async (req, res) => {
       outputExample,
       constraints,
       testCases,
+      topics,
     });
 
     const savedProblem = await newProblem.save();
@@ -73,6 +76,7 @@ exports.approveproblem = async (req, res) => {
       outputExample: userProblem.outputExample,
       constraints: userProblem.constraints,
       testCases: userProblem.testCases,
+      topics: userProblem.topics,
     });
 
     await newProblem.save();

@@ -14,6 +14,7 @@ router.post("/addproblems", async (req, res) => {
     outputExample,
     constraints,
     testCases,
+    topics,
   } = req.body;
 
   if (
@@ -23,7 +24,8 @@ router.post("/addproblems", async (req, res) => {
     !inputExample ||
     !outputExample ||
     !constraints ||
-    !testCases
+    !testCases ||
+    !topics
   ) {
     return res.status(400).json({ error: "All fields are required" });
   }
@@ -37,6 +39,7 @@ router.post("/addproblems", async (req, res) => {
       outputExample,
       constraints,
       testCases,
+      topics,
     });
 
     const savedProblem = await newProblem.save();

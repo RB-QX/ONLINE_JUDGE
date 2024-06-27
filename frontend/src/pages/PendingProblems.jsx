@@ -156,6 +156,8 @@ const PendingProblems = () => {
             <p>{problem.description}</p>
             <h3 className="font-bold mt-2">Difficulty:</h3>
             <p>{problem.difficulty}</p>
+            <h3 className="font-bold mt-2">Topics Related:</h3>
+            <p>{problem.topics}</p>
             <h3 className="font-bold mt-2">Input Example:</h3>
             <p>{problem.inputExample}</p>
             <h3 className="font-bold mt-2">Output Example:</h3>
