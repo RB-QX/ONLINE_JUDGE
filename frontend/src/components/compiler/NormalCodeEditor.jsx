@@ -73,14 +73,15 @@ function NormalCodeEditor({ problemId, userId }) {
       alert("You must be logged in to submit code.");
       return;
     }
+    const userId = localStorage.getItem("userId") || ""; // Default to empty string if undefined
     const payload = {
-      userId: userId,
+      userId,
       problemId,
       code,
       language,
       input,
     };
-
+    console.log(userId);
     try {
       //const { data } = await axios.post("http://localhost:5000/run", payload);
       const { data } = await axios.post("http://localhost:5000/run", payload, {

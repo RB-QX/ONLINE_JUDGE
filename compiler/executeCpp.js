@@ -9,6 +9,7 @@ if (!fs.existsSync(outputPath)) {
 }
 
 const executeCpp = (filepath) => {
+  //console.log(input);
   const jobId = path.basename(filepath).split(".")[0];
   const outPath = path.join(outputPath, `${jobId}.exe`);
 
@@ -26,24 +27,7 @@ const executeCpp = (filepath) => {
       }
     );
   });
-  // return new Promise((resolve, reject) => {
-  //   const process = exec(
-  //     `g++ ${filepath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.exe`,
-  //     (error, stdout, stderr) => {
-  //       if (error) {
-  //         reject({ error, stderr });
-  //       }
-  //       if (stderr) {
-  //         reject(stderr);
-  //       }
-  //       resolve(stdout);
-  //     }
-  //   );
-  //   process.stdin.write(inputFile);
-  //   process.stdin.end();
-  // });
 };
-
 module.exports = {
   executeCpp,
 };

@@ -20,6 +20,10 @@ import NormalCodeEditor from "./components/compiler/NormalCodeEditor";
 import SpecificPage from "./pages/SpecificPage";
 import DeleteProblem from "./components/DeleteProblemPage";
 import UpdateProblem from "./pages/UpdatePage";
+import ContestPage from "./components/contest/ContestPage";
+import LeaderboardPage from "./components/contest/LeaderboardPage";
+import AddContestProblem from "./components/contest/AddContestProblem";
+import SpecificContestPage from "./components/contest/SpecificContestPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,6 +35,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/compiler" element={<NormalCodeEditor />} />
+        <Route
+          path="/contest"
+          element={<ContestPage setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route
           path="/login"
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
@@ -69,6 +78,12 @@ function App() {
         <Route element={<AdminRoute isLoggedIn={isLoggedIn} />}>
           <Route path="/pendingproblems" element={<PendingProblems />} />
         </Route>
+        <Route element={<AdminRoute isLoggedIn={isLoggedIn} />}>
+          <Route
+            path="/contestproblemform"
+            element={<AddContestProblem isLoggedIn={isLoggedIn} />}
+          />
+        </Route>
 
         <Route path="/allproblems" element={<ProblemsPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -81,6 +96,11 @@ function App() {
           path="/problems/:id/"
           element={<SpecificPage isLoggedIn={isLoggedIn} />}
         />
+        <Route
+          path="/allcontestproblem/:id/"
+          element={<SpecificContestPage isLoggedIn={isLoggedIn} />}
+        />
+
         <Route
           path="/dashboard"
           element={

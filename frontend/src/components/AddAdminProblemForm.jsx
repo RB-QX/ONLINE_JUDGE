@@ -8,7 +8,7 @@ const AddAdminProblemForm = ({ isLoggedIn }) => {
   const [outputExample, setOutputExample] = useState("");
   const [constraints, setConstraints] = useState("");
   const [testCases, setTestCases] = useState([{ input: "", output: "" }]);
-
+  const [topics, setTopics] = useState([]);
   const handleTestCaseChange = (index, event) => {
     const newTestCases = testCases.map((testCase, i) =>
       i === index
@@ -32,6 +32,7 @@ const AddAdminProblemForm = ({ isLoggedIn }) => {
       outputExample,
       constraints,
       testCases,
+      topics,
     };
 
     try {
@@ -53,6 +54,7 @@ const AddAdminProblemForm = ({ isLoggedIn }) => {
         setOutputExample("");
         setConstraints("");
         setTestCases([{ input: "", output: "" }]);
+        setTopics([]);
       } else {
         alert("Error adding problem");
       }
@@ -93,6 +95,20 @@ const AddAdminProblemForm = ({ isLoggedIn }) => {
           className="mt-1 block w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Description"
           rows={4}
+          required
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          Topics
+        </label>
+        <input
+          type="text"
+          value={topics}
+          onChange={(e) => setTopics(e.target.value)}
+          className="mt-1 block w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter topics separated by commas"
           required
         />
       </div>

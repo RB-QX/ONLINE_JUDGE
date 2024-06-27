@@ -7,12 +7,31 @@ if (!fs.existsSync(outputPath)) {
   fs.mkdirSync(outputPath, { recursive: true });
 }
 
-const executeC = (filepath) => {
+// const executeC = (filepath) => {
+//   const jobId = path.basename(filepath).split(".")[0];
+//   const outPath = path.join(outputPath, `${jobId}.exe`);
+
+//   return new Promise((resolve, reject) => {
+//     exec(
+//       `gcc ${filepath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.exe`,
+//       (error, stdout, stderr) => {
+//         if (error) {
+//           reject({ error, stderr });
+//         }
+//         if (stderr) {
+//           reject(stderr);
+//         }
+//         resolve(stdout);
+//       }
+//     );
+//   });
+// };
+const executeC = (filepath, input) => {
   const jobId = path.basename(filepath).split(".")[0];
   const outPath = path.join(outputPath, `${jobId}.exe`);
 
   return new Promise((resolve, reject) => {
-    exec(
+    const process = exec(
       `gcc ${filepath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.exe`,
       (error, stdout, stderr) => {
         if (error) {
@@ -24,6 +43,10 @@ const executeC = (filepath) => {
         resolve(stdout);
       }
     );
+    if (input) {
+      process.stdin.write(input);
+      process.stdin.end();
+    }
   });
 };
 

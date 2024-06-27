@@ -46,6 +46,7 @@ const Dashboard = () => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalProblems, setTotalProblems] = useState(0);
   const [pendingProblems, setPendingProblems] = useState(0);
+  const [contestProblems, setContestProblems] = useState(0);
 
   useEffect(() => {
     // Fetch total users
@@ -58,6 +59,12 @@ const Dashboard = () => {
     fetch("http://localhost:8000/allproblems")
       .then((response) => response.json())
       .then((data) => setTotalProblems(data.length))
+      .catch((error) => console.error("Error fetching total problems:", error));
+
+    // Fetch totla contest problems
+    fetch("http://localhost:8000/allcontestproblem")
+      .then((response) => response.json())
+      .then((data) => setContestProblems(data.length))
       .catch((error) => console.error("Error fetching total problems:", error));
 
     // Fetch pending problems
@@ -86,6 +93,13 @@ const Dashboard = () => {
           <p className="text-2xl">{pendingProblems}</p>
           <Link to="/pendingproblems" className="text-blue-500 underline">
             View Pending Problems
+          </Link>
+        </div>
+        <div className="bg-yellow-100 p-4 rounded shadow">
+          <h2 className="text-xl font-semibold">Contest</h2>
+          <p className="text-2xl">{contestProblems}</p>
+          <Link to="/contestproblemform" className="text-blue-500 underline">
+            Click to Add Question to Contest
           </Link>
         </div>
       </div>

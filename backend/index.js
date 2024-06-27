@@ -11,7 +11,7 @@ const userRoutes = require("./routes/user");
 const problemsRoutes = require("./routes/problems");
 const adduserproblemRoutes = require("./routes/adduserproblem");
 //const authMiddleware = require("./middlewars/auth");
-
+const contestproblemRoutes = require("./routes/ContestRoute");
 const code = require("./routes/code");
 app.use(cors());
 DBConnection();
@@ -24,6 +24,7 @@ app.use("/", problemsRoutes);
 app.use("/", adduserproblemRoutes);
 app.use("/", code);
 
+app.use("/", contestproblemRoutes);
 //app.use("/adduserproblem", authMiddleware, adduserproblemRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World to onlinejudge");

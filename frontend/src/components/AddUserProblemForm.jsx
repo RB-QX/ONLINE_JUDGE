@@ -104,7 +104,7 @@ const AddUserProblemForm = ({ isLoggedIn }) => {
         </label>
         <input
           type="text"
-          value={topics.join(", ")}
+          value={topics}
           onChange={(e) => setTopics(e.target.value)}
           className="mt-1 block w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Enter topics separated by commas"

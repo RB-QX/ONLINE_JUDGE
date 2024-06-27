@@ -34,6 +34,11 @@ const Navbar = (props) => {
           <li>
             <Link to="/">Home</Link>
           </li>
+          {isLoggedIn && (
+            <li>
+              <Link to="/contest">Contest</Link>
+            </li>
+          )}
           <li>
             <Link to="/compiler">Compiler</Link>
           </li>

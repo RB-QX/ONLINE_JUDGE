@@ -1,8 +1,21 @@
 const { exec } = require("child_process");
 
-const executeJava = (filepath) => {
+// const executeJava = (filepath) => {
+//   return new Promise((resolve, reject) => {
+//     exec(`java ${filepath}`, (error, stdout, stderr) => {
+//       if (error) {
+//         reject({ error, stderr });
+//       }
+//       if (stderr) {
+//         reject(stderr);
+//       }
+//       resolve(stdout);
+//     });
+//   });
+// };
+const executeJava = (filepath, input) => {
   return new Promise((resolve, reject) => {
-    exec(`java ${filepath}`, (error, stdout, stderr) => {
+    const process = exec(`java ${filepath}`, (error, stdout, stderr) => {
       if (error) {
         reject({ error, stderr });
       }
@@ -11,6 +24,10 @@ const executeJava = (filepath) => {
       }
       resolve(stdout);
     });
+    if (input) {
+      process.stdin.write(input);
+      process.stdin.end();
+    }
   });
 };
 

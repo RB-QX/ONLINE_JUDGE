@@ -313,7 +313,7 @@ const ProblemsPage = () => {
                   </Link>
                 </td>
                 <td className="py-2 px-4 border-r border-gray-200 text-center">
-                  {problem.topics.join(", ")}
+                  {problem.topics}
                 </td>
                 <td
                   className={`py-2 px-4 border-r border-gray-200 text-center ${getDifficultyColor(
