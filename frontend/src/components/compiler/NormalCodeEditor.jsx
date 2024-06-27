@@ -45,17 +45,26 @@ if __name__ == "__main__":
         System.out.println("Hello, World!");
     }
 }`,
+  js: `// Define the main function
+function helloWorld() {
+  console.log("Hello, World!");
+}
+
+// Call the function to execute it
+helloWorld();`,
 };
 
 function NormalCodeEditor({ problemId, userId }) {
   const [code, setCode] = useState(starterCodes.cpp);
   const [output, setOutput] = useState("");
+  const [input, setInput] = useState("");
   const [language, setLanguage] = useState("cpp");
 
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
     setLanguage(selectedLanguage);
     setCode(starterCodes[selectedLanguage]);
+    setOutput(""); // Clear the output when the language is changed
   };
 
   const handleSubmit = async () => {
@@ -69,6 +78,7 @@ function NormalCodeEditor({ problemId, userId }) {
       problemId,
       code,
       language,
+      input,
     };
 
     try {
@@ -78,10 +88,11 @@ function NormalCodeEditor({ problemId, userId }) {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(data);
       setOutput(data.output);
     } catch (error) {
       console.error("Error running code:", error.response);
-      setOutput(error.response?.data?.error || "Error running code");
+      setOutput(error.response?.data?.error.stderr || "Error running code");
     }
   };
 
@@ -97,6 +108,7 @@ function NormalCodeEditor({ problemId, userId }) {
         <option value="c">C</option>
         <option value="py">Python</option>
         <option value="java">Java</option>
+        <option value="js">JavaScript</option>
       </select>
       <br />
       <div
@@ -121,6 +133,13 @@ function NormalCodeEditor({ problemId, userId }) {
           }}
         />
       </div>
+      <textarea
+        className="w-full max-w-lg px-3 py-2 border border-gray-300 rounded mb-4"
+        placeholder="Enter custom input here"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        style={{ height: "100px" }}
+      />
 
       <div className="flex flex-row gap-2">
         <button
@@ -159,7 +178,8 @@ function NormalCodeEditor({ problemId, userId }) {
               fontSize: 12,
             }}
           >
-            {output}
+            {/* {output} */}
+            {typeof output === "string" ? output : JSON.stringify(output)}
           </p>
         </div>
       )}

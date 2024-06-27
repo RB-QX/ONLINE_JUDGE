@@ -26,6 +26,22 @@ const executeCpp = (filepath) => {
       }
     );
   });
+  // return new Promise((resolve, reject) => {
+  //   const process = exec(
+  //     `g++ ${filepath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.exe`,
+  //     (error, stdout, stderr) => {
+  //       if (error) {
+  //         reject({ error, stderr });
+  //       }
+  //       if (stderr) {
+  //         reject(stderr);
+  //       }
+  //       resolve(stdout);
+  //     }
+  //   );
+  //   process.stdin.write(inputFile);
+  //   process.stdin.end();
+  // });
 };
 
 module.exports = {

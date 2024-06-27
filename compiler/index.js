@@ -3,7 +3,10 @@ const app = express();
 const { generateFile } = require("./generateFile");
 const { executeCpp } = require("./executeCpp.js");
 const { executePython } = require("./executePython.js");
+const { executeJava } = require("./executeJava.js");
 const cors = require("cors");
+const { executeC } = require("./executeC.js");
+const { executeJavaScript } = require("./executeJs.js");
 
 //middlewares
 app.use(cors());
@@ -28,7 +31,11 @@ app.post("/run", async (req, res) => {
     let output;
     if (language === "cpp") {
       output = await executeCpp(filePath);
-    } else if (language == "java") {
+    } else if (language === "c") {
+      output = await executeC(filePath);
+    } else if (language === "js") {
+      output = await executeJavaScript(filePath);
+    } else if (language === "java") {
       output = await executeJava(filePath);
     } else {
       output = await executePython(filePath);

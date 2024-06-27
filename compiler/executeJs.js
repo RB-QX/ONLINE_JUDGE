@@ -1,8 +1,9 @@
 const { exec } = require("child_process");
+//const path = require("path");
 
-const executeJava = (filepath) => {
+const executeJavaScript = (filepath) => {
   return new Promise((resolve, reject) => {
-    exec(`java ${filepath}`, (error, stdout, stderr) => {
+    exec(`node ${filepath}`, (error, stdout, stderr) => {
       if (error) {
         reject({ error, stderr });
       }
@@ -15,5 +16,5 @@ const executeJava = (filepath) => {
 };
 
 module.exports = {
-  executeJava,
+  executeJavaScript,
 };

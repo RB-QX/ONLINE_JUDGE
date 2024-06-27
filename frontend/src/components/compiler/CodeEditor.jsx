@@ -79,6 +79,7 @@ function CodeEditor({ problemId, userId }) {
     const selectedLanguage = e.target.value;
     setLanguage(selectedLanguage);
     setCode(starterCodes[selectedLanguage]);
+    setOutput("");
   };
 
   const handleSubmit = async () => {
@@ -104,6 +105,7 @@ function CodeEditor({ problemId, userId }) {
       setOutput(data.output);
     } catch (error) {
       console.error("Error running code:", error.response);
+      setOutput(error.response?.data?.error.stderr || "Error running code");
     }
   };
 
@@ -205,7 +207,8 @@ function CodeEditor({ problemId, userId }) {
               fontSize: 12,
             }}
           >
-            {output}
+            {/* {output} */}
+            {typeof output === "string" ? output : JSON.stringify(output)}
           </p>
         </div>
       )}
