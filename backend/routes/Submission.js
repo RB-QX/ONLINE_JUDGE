@@ -106,10 +106,14 @@ router.post("/submit", async (req, res) => {
         code,
         language,
         problemName: problem.title,
-        verdict: "AC",
+        verdict: "Accepted",
       });
       await submission.save();
       userinfo.problems_submitted.push(submission._id);
+      if (problem.verdict !== "Accepted") {
+        problem.verdict = submission.verdict;
+        await problem.save();
+      }
       await userinfo.save();
 
       return res.json({

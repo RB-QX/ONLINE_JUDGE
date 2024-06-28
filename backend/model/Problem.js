@@ -46,6 +46,10 @@ const ProblemSchema = new Schema(
       type: Number,
       default: 0,
     },
+    verdict: {
+      type: String,
+      default: "Unsolved",
+    },
   },
   {
     timestamps: true,
