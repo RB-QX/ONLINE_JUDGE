@@ -9,6 +9,7 @@ const SpecificPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const userId = localStorage.getItem("userId");
+  console.log(userId);
   useEffect(() => {
     const fetchProblem = async () => {
       try {

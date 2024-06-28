@@ -53,6 +53,8 @@ function CodeEditor({ problemId, userId }) {
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("cpp");
   const [input, setInput] = useState("");
+  const [verdict, setVerdict] = useState("");
+
   useEffect(() => {
     const fetchSavedCode = async () => {
       try {
@@ -81,14 +83,16 @@ function CodeEditor({ problemId, userId }) {
     setLanguage(selectedLanguage);
     setCode(starterCodes[selectedLanguage]);
     setOutput("");
+    setVerdict("");
   };
 
-  const handleSubmit = async () => {
+  const handleRun = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("You must be logged in to submit code.");
       return;
     }
+    console.log(userId);
     const payload = {
       userId,
       problemId,
@@ -108,6 +112,43 @@ function CodeEditor({ problemId, userId }) {
     } catch (error) {
       console.error("Error running code:", error.response);
       setOutput(error.response?.data?.error.stderr || "Error running code");
+    }
+  };
+  const handleSubmitCode = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to submit code.");
+      return;
+    }
+    console.log(userId);
+    const payload = {
+      userId,
+      problemId,
+      code,
+      language,
+      input,
+      isSubmit: true, // Set isSubmit to true for submit operation
+    };
+    try {
+      const response = await fetch("http://localhost:8000/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      console.log("Submission result:", data);
+      if (data.isCorrect) {
+        setOutput(`Accepted, Total test case: ${data.passedtestcase}`);
+      } else {
+        setOutput(
+          `Test Case ${data.pass} incorrect.\nWrong Test Case: \n ${data.wrongTC} \nYour Output: \n ${data.YourOutput} \nCorrect Output: \n ${data.CorrectOutput} `
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting code:", error);
     }
   };
 
@@ -190,7 +231,7 @@ function CodeEditor({ problemId, userId }) {
 
       <div className="flex flex-row gap-2">
         <button
-          onClick={handleSubmit}
+          onClick={handleRun}
           type="button"
           className="text-center inline-flex items-center text-white bg-gradient-to-br from-yellow-500 to-orange-400 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
         >
@@ -214,6 +255,13 @@ function CodeEditor({ problemId, userId }) {
             />
           </svg>
           Run
+        </button>
+        <button
+          onClick={handleSubmitCode}
+          type="button"
+          className="text-center inline-flex items-center text-white bg-gradient-to-br from-green-500 to-blue-400 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+        >
+          Submit
         </button>
 
         <button

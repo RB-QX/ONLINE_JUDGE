@@ -74,6 +74,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
         localStorage.setItem("email", data.email);
+        localStorage.setItem("userId", data._id);
         setIsLoggedIn(true);
         toast.success("Account Created");
         if (data.role === "admin") {
