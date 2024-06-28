@@ -41,7 +41,7 @@ const ProblemsPage = () => {
   };
 
   const getVerdict = (verdict) => {
-    return verdict == "Accepted" ? "Solved" : "Unsolved";
+    return verdict === "Accepted" ? "Solved" : "Unsolved";
   };
   const getVerdictStyle = (verdict) => {
     switch (verdict) {

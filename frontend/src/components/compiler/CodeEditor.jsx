@@ -53,7 +53,7 @@ function CodeEditor({ problemId, userId }) {
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("cpp");
   const [input, setInput] = useState("");
-  const [verdict, setVerdict] = useState("");
+  //const [verdict, setVerdict] = useState("");
 
   useEffect(() => {
     const fetchSavedCode = async () => {
@@ -83,7 +83,7 @@ function CodeEditor({ problemId, userId }) {
     setLanguage(selectedLanguage);
     setCode(starterCodes[selectedLanguage]);
     setOutput("");
-    setVerdict("");
+    //setVerdict("");
   };
 
   const handleRun = async () => {
