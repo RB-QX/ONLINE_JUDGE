@@ -7,43 +7,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 //const cookieparser = require("cookie-parser");
 
-// exports.signup = async (req, res) => {
-//   console.log(req.body);
-//   try {
-//     const { firstname, lastname, email, password } = req.body;
-
-//     if (!(firstname && lastname && email && password)) {
-//       return res.status(400).json({ message: "Please fill all the fields" });
-//     }
-
-//     const existuser = await User.findOne({ email });
-//     if (existuser) {
-//       //console.log(user);
-//       return res.status(400).json({ message: "User already exists" });
-//     }
-
-//     const hashpassword = await bcrypt.hash(password, 10);
-//     const user = await User.create({
-//       firstname,
-//       lastname,
-//       email,
-//       password: hashpassword,
-//     });
-
-//     const token = jwt.sign({ id: user._id, email }, process.env.SECRET_KEY, {
-//       expiresIn: "1h",
-//     });
-//     user.token = token;
-//     user.password = undefined;
-
-//     console.log(token);
-//     res.status(200).json({ message: "successfully registered", user });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: "Internal Serverrr Error", error: error });
-//   }
-// };
-
 exports.signup = async (req, res) => {
   console.log(req.body);
   try {

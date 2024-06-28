@@ -7,11 +7,11 @@ router.post("/save-code", async (req, res) => {
   const { userId, problemId, code, language } = req.body;
 
   try {
-    let userCode = await UserCode.findOne({ userId, problemId });
+    let userCode = await UserCode.findOne({ userId, problemId, language });
     if (userCode) {
       // Update existing user code
       userCode.code = code;
-      userCode.language = language;
+      //userCode.language = language;
     } else {
       // Create new user code entry
       userCode = new UserCode({ userId, problemId, code, language });
@@ -26,7 +26,7 @@ router.post("/save-code", async (req, res) => {
 
 // GET endpoint to retrieve user code
 router.get("/get-code", async (req, res) => {
-  const { userId, problemId } = req.query;
+  const { userId, problemId, language } = req.query;
 
   console.log(
     "Received request with userId:",
@@ -36,14 +36,16 @@ router.get("/get-code", async (req, res) => {
   );
 
   try {
-    const userCode = await UserCode.findOne({ userId, problemId });
+    const userCode = await UserCode.findOne({ userId, problemId, language });
 
     if (!userCode) {
       console.log(
         "No code found for this problem with userId:",
         userId,
         "and problemId:",
-        problemId
+        problemId,
+        "and language:",
+        language
       );
       return res
         .status(404)

@@ -15,7 +15,7 @@ import AddUserProblemForm from "./components/AddUserProblemForm";
 import PendingProblems from "./pages/PendingProblems";
 import AdminRoute from "./components/AdminRoute";
 import ProfilePage from "./pages/ProfilePage";
-// import CodeEditor from "./components/compiler/CodeEditor";
+
 import NormalCodeEditor from "./components/compiler/NormalCodeEditor";
 import SpecificPage from "./pages/SpecificPage";
 import DeleteProblem from "./components/DeleteProblemPage";

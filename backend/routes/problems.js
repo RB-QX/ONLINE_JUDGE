@@ -131,29 +131,8 @@ router.delete("/delete-problem/:id", async (req, res) => {
 });
 
 module.exports = router;
-
-// router.get("/problems/pending", async (req, res) => {
-//   try {
-//     const pendingProblems = await Problem.find({ status: "Pending" });
-//     res.json(pendingProblems);
-//   } catch (error) {
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-
-// router.patch("/problems/verify/:id", async (req, res) => {
-//   try {
-//     const updatedProblem = await Problem.findByIdAndUpdate(
-//       req.params.id,
-//       { status: "Verified" },
-//       { new: true }
-//     );
-//     res.json(updatedProblem);
-//   } catch (error) {
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-
+//"/delete-problem/:id"
+//"/allproblems/:id"
 // // Import the required modules
 // const express = require("express");
 

@@ -7,8 +7,8 @@ const { executeJava } = require("./executeJava.js");
 const cors = require("cors");
 const { executeC } = require("./executeC.js");
 const { executeJavaScript } = require("./executeJs.js");
-//const executeCode = require("./executeCode.js");
-//const User = require("../backend/model/User");
+const { generateInputFile } = require("./generateInputFile.js");
+
 //middlewares
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -29,21 +29,23 @@ app.post("/run", async (req, res) => {
   }
   try {
     const filePath = await generateFile(language, code);
-    console.log(filePath); // const output = await executeCpp(filePath);
+    const inputPath = await generateInputFile(input);
+    console.log(input); // const output = await executeCpp(filePath);
     let output;
     if (language === "cpp") {
-      output = await executeCpp(filePath);
+      output = await executeCpp(filePath, inputPath);
+      console.log("hii");
     } else if (language === "c") {
-      output = await executeC(filePath);
+      output = await executeC(filePath, inputPath);
     } else if (language === "js") {
-      output = await executeJavaScript(filePath);
+      output = await executeJavaScript(filePath, inputPath);
     } else if (language === "java") {
-      output = await executeJava(filePath);
+      output = await executeJava(filePath, inputPath);
     } else {
-      output = await executePython(filePath);
+      output = await executePython(filePath, inputPath);
     }
 
-    res.json({ filePath, output });
+    res.json({ filePath, inputPath, output });
   } catch (error) {
     //console.log("error is this", error.stderr);
     res.status(500).json({ error: error });

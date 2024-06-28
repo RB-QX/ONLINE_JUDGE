@@ -11,7 +11,8 @@ import axios from "axios";
 
 const starterCodes = {
   cpp: `// Include the input/output stream library
-#include <iostream>
+  #include <iostream>
+  using namespace std;
 
 // Define the main function
 int main() {
@@ -134,13 +135,37 @@ function NormalCodeEditor({ problemId, userId }) {
           }}
         />
       </div>
-      <textarea
+      {/* <textarea
         className="w-full max-w-lg px-3 py-2 border border-gray-300 rounded mb-4"
         placeholder="Enter custom input here"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         style={{ height: "100px" }}
-      />
+      /> */}
+      <div className="grid grid-cols-2 gap-4 mt-4">
+        <div>
+          <label className="font-semibold text-gray-800 whitespace-pre">
+            User Input:
+          </label>
+          <textarea
+            rows="5"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="border rounded w-full p-2"
+          />
+        </div>
+        <div>
+          <label className="font-semibold text-gray-800 whitespace-pre">
+            User Output:
+          </label>
+          <textarea
+            readOnly
+            rows="5"
+            value={output}
+            className="border rounded w-full p-2"
+          />
+        </div>
+      </div>
 
       <div className="flex flex-row gap-2">
         <button
@@ -170,20 +195,6 @@ function NormalCodeEditor({ problemId, userId }) {
           Run
         </button>
       </div>
-
-      {output && (
-        <div className="outputbox mt-4 bg-gray-100 rounded-md shadow-md p-4">
-          <p
-            style={{
-              fontFamily: '"Fira code", "Fira Mono", monospace',
-              fontSize: 12,
-            }}
-          >
-            {/* {output} */}
-            {typeof output === "string" ? output : JSON.stringify(output)}
-          </p>
-        </div>
-      )}
     </div>
   );
 }
