@@ -38,18 +38,18 @@ const ProblemSchema = new Schema(
       type: String,
       required: true,
     },
-    total_submissions: {
-      type: Number,
-      default: 0,
-    },
-    total_accepted: {
-      type: Number,
-      default: 0,
-    },
-    verdict: {
-      type: String,
-      default: "Unsolved",
-    },
+    // total_submissions: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // total_accepted: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // verdict: {
+    //   type: String,
+    //   default: "Unsolved",
+    // },
   },
   {
     timestamps: true,

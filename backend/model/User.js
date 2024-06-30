@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+
   problems_submitted: [
     {
       type: mongoose.Schema.Types.ObjectId,

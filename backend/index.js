@@ -14,7 +14,14 @@ const adduserproblemRoutes = require("./routes/adduserproblem");
 const contestproblemRoutes = require("./routes/ContestRoute");
 const code = require("./routes/code");
 const SubmissionRoutes = require("./routes/Submission");
-app.use(cors());
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 DBConnection();
 
 app.use(express.json());
