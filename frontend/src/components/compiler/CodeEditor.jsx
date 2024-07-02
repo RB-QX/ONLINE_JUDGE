@@ -88,7 +88,7 @@ function CodeEditor({ problemId, userId }) {
   const handleRun = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("You must be logged in to submit code.");
+      alert("You must be logged in to run code.");
       return;
     }
 
@@ -160,6 +160,11 @@ function CodeEditor({ problemId, userId }) {
   };
 
   const handleSaveCode = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to save code.");
+      return;
+    }
     const payload = {
       userId,
       problemId,

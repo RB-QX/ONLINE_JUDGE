@@ -7,6 +7,12 @@ router.post("/save-code", async (req, res) => {
   const { userId, problemId, code, language } = req.body;
 
   try {
+    if (!userId || !problemId) {
+      return res
+        .status(400)
+        .json({ message: "userId and problemId are required" });
+    }
+
     let userCode = await UserCode.findOne({ userId, problemId, language });
     if (userCode) {
       // Update existing user code
