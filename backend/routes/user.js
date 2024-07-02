@@ -1,7 +1,7 @@
 // Import the required modules
 const express = require("express");
 const router = express.Router();
-
+const authMiddleware = require("../middlewares/auth");
 // Import the required controllers and middleware functions
 const {
   login,
@@ -14,8 +14,8 @@ const {
 // Routes for Login, Signup, and Authentication
 
 // Route for user login
+//router.post("/login", authMiddleware, login);
 router.post("/login", login);
-
 // Route for user signup
 router.post("/register", signup);
 router.get("/totaluser", totaluser);

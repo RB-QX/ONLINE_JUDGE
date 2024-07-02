@@ -14,16 +14,18 @@ const adduserproblemRoutes = require("./routes/adduserproblem");
 const contestproblemRoutes = require("./routes/ContestRoute");
 const code = require("./routes/code");
 const SubmissionRoutes = require("./routes/Submission");
+const usersolveroute = require("./routes/usersolveroute");
+const usersolveprogramroute = require("./routes/usersolveprogramroute");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+//app.use(cors());
+DBConnection();
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000", // replace with your frontend domain
     credentials: true,
   })
 );
-DBConnection();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -34,6 +36,8 @@ app.use("/", code);
 
 app.use("/", contestproblemRoutes);
 app.use("/", SubmissionRoutes);
+app.use("/", usersolveroute);
+app.use("/", usersolveprogramroute);
 //app.use("/adduserproblem", authMiddleware, adduserproblemRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World to onlinejudge");

@@ -7,9 +7,13 @@ const { executeJavaScript } = require("./executeJs.js");
 const executeCode = async (language, filePath, inputPath) => {
   try {
     let output;
+
     if (language === "cpp") {
+      console.log("inside language");
       output = await executeCpp(filePath, inputPath);
+      console.log(output);
     } else if (language === "c") {
+      console.log(language);
       output = await executeC(filePath, inputPath);
     } else if (language === "js") {
       output = await executeJavaScript(filePath, inputPath);

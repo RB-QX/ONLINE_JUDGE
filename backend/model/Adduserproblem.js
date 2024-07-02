@@ -34,7 +34,7 @@ const UserProblemSchema = new Schema({
     },
   ],
   topics: {
-    type: [String],
+    type: String,
     required: true,
   },
 });

@@ -1,5 +1,3 @@
-const express = require("express");
-
 const UserProblem = require("../model/Adduserproblem");
 const Problem = require("../model/Problem"); // Main problem model
 
@@ -67,6 +65,10 @@ exports.approveproblem = async (req, res) => {
       return res.status(404).json({ error: "Problem not found" });
     }
 
+    if (!userProblem.topics) {
+      return res.status(400).json({ error: "Topics field is required" });
+    }
+
     // Create a new problem in the main problem collection
     const newProblem = new Problem({
       title: userProblem.title,
@@ -86,6 +88,7 @@ exports.approveproblem = async (req, res) => {
       .status(200)
       .json({ message: "Problem approved and added to main collection" });
   } catch (error) {
+    console.error("Error approving problem:", error); // Detailed error logging
     res.status(500).json({ error: "Server error" });
   }
 };

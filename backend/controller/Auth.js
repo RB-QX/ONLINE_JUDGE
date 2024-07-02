@@ -81,6 +81,8 @@ exports.login = async (req, res) => {
     const options = {
       expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
     };
 
     res.status(200).cookie("token", token, options).json({
@@ -96,40 +98,6 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error });
   }
 };
-
-// exports.forgotpassword = async (req, res) => {
-//   const { email } = req.body;
-//   User.findOne({ email: email }).then((user) => {
-//     if (!user) {
-//       return res.send({ Status: "User not existed" });
-//     }
-//     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-//       expiresIn: "1d",
-//     });
-//     var transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       auth: {
-//         user: "riturajprasad2412@gmail.com",
-//         pass: "zxqewvrkkwcfvftg",
-//       },
-//     });
-
-//     var mailOptions = {
-//       from: "riturajprasad2412@gmail.com",
-//       to: email,
-//       subject: "Reset Password Link",
-//       text: `http://localhost:3000/reset_password/${user._id}/${token}`,
-//     };
-
-//     transporter.sendMail(mailOptions, function (error, info) {
-//       if (error) {
-//         console.log(error);
-//       } else {
-//         console.log("Email sent: " + info.response);
-//       }
-//     });
-//   });
-// };
 
 exports.forgotpassword = async (req, res) => {
   const { email } = req.body;

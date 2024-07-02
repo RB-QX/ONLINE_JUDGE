@@ -34,7 +34,7 @@ const ConstestProblemSchema = new Schema({
     },
   ],
   topics: {
-    type: [String],
+    type: String,
     required: true,
   },
 });

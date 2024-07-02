@@ -120,7 +120,7 @@ function CodeEditor({ problemId, userId }) {
       alert("You must be logged in to submit code.");
       return;
     }
-    console.log(userId);
+    //console.log(userId);
     const payload = {
       userId,
       problemId,
@@ -139,8 +139,10 @@ function CodeEditor({ problemId, userId }) {
       });
 
       const data = await response.json();
-      console.log("Submission result:", data);
+
+      //console.log(data.pass);
       if (data.isCorrect) {
+        console.log(data.passedtestcase);
         setOutput(`Accepted, Total test case: ${data.passedtestcase}`);
       } else {
         setOutput(
@@ -149,6 +151,7 @@ function CodeEditor({ problemId, userId }) {
       }
     } catch (error) {
       console.error("Error submitting code:", error);
+      setOutput("Error submitting code");
     }
   };
 
@@ -199,7 +202,7 @@ function CodeEditor({ problemId, userId }) {
             outline: "none",
             border: "none",
             backgroundColor: "#f7fafc",
-            height: "100%",
+            height: "600%",
             overflowY: "auto",
           }}
         />

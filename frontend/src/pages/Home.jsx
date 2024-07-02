@@ -6,9 +6,8 @@ import FeatureCard from "../components/FeatureCard";
 import WhyChooseUsCard from "../components/WhyChooseUsCard";
 import Footer from "../components/Footer";
 import data from "../assets/data.json";
-import CalenderPage from "./CalenderPage";
 
-const Home = ({ isLoggedIn }) => {
+const Home = () => {
   const { topics, features, whyChooseUs, footerLinks } = data;
 
   return (
@@ -87,7 +86,7 @@ const Home = ({ isLoggedIn }) => {
       </main>
 
       {/* Footer */}
-      <CalenderPage />
+
       <Footer footerLinks={footerLinks} />
     </div>
   );

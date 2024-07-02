@@ -9,7 +9,7 @@ const {
   rejectproblem,
 } = require("../controller/UserProblem");
 
-router.post("/adduserproblem", authMiddleware, adduserproblems);
+router.post("/adduserproblem", adduserproblems);
 
 router.get("/allpendinguserproblems", alluserproblems);
 

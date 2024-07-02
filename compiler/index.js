@@ -1,17 +1,12 @@
 const express = require("express");
 const app = express();
 const { generateFile } = require("./generateFile");
-// const { executeCpp } = require("./executeCpp.js");
-// const { executePython } = require("./executePython.js");
-// const { executeJava } = require("./executeJava.js");
+
 const cors = require("cors");
-// const { executeC } = require("./executeC.js");
-// const { executeJavaScript } = require("./executeJs.js");
+
 const { generateInputFile } = require("./generateInputFile.js");
 const { executeCode } = require("./executeCode");
-const User = require("../backend/model/User");
-const Problem = require("../backend/model/Problem");
-const Submission = require("../backend/model/Submission");
+
 //middlewares
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -37,13 +32,16 @@ app.post("/run", async (req, res) => {
     const inputPath = await generateInputFile(input);
 
     // Execute code using executeCode function
-    const output = await executeCode(language, filePath, inputPath);
 
+    console.log(inputPath);
+    const output = await executeCode(language, filePath, inputPath);
+    /// const output = await executeCode(filePath,language,  input);
+    //console.log(output);
     // Return response with file paths and output
     res.json({ filePath, inputPath, output });
   } catch (error) {
-    console.error("Error executing code:", error);
-    res.status(500).json({ error: error });
+    console.error("Error executing code:", error.messsage);
+    res.status(500).json({ error: error.message });
   }
 });
 

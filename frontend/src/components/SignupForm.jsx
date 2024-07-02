@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const SignupForm = ({ setIsLoggedIn }) => {
+const SignupForm = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -75,7 +75,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
         localStorage.setItem("role", data.role);
         localStorage.setItem("email", data.email);
         localStorage.setItem("userId", data._id);
-        setIsLoggedIn(true);
+        //setIsLoggedIn(true);
         toast.success("Account Created");
         if (data.role === "admin") {
           navigate("/dashboard"); // Assuming you're using React Router's `navigate` function
