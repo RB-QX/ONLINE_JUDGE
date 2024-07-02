@@ -54,7 +54,7 @@ router.get("/get-code", async (req, res) => {
         language
       );
       return res
-        .status(404)
+        .status(200)
         .json({ message: "No code found for this problem" });
     }
 

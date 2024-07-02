@@ -350,7 +350,7 @@ router.get("/verdict/:userId/:problemId", async (req, res) => {
     }).sort({ createdAt: -1 }); // Get the latest submission
 
     if (!submission) {
-      return res.status(404).json({ verdict: "Unsolved" });
+      return res.status(200).json({ verdict: "Unsolved" });
     }
 
     const verdict = submission.verdict === "Accepted" ? "Solved" : "Unsolved";
