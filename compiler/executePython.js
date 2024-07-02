@@ -52,15 +52,14 @@ const executePython = (filepath, inputPath) => {
 
     exec(command, { maxBuffer: 1024 * 1024 }, (error, stdout, stderr) => {
       if (error) {
-        console.error("Execution Error:", error);
-        return reject({ error: error.message, stderr });
+        //console.error("Compilation error:", error);
+        reject(new Error(`Compilation error: ${error.message}`));
+      } else if (stderr) {
+        // console.error("Runtime Error:", stderr);
+        reject(new Error(`Runtime error: ${stderr}`));
+      } else {
+        resolve(stdout);
       }
-      if (stderr) {
-        console.error("Execution STDERR:", stderr);
-        return reject(stderr);
-      }
-      console.log("Execution STDOUT:", stdout);
-      resolve(stdout);
     });
   });
 };

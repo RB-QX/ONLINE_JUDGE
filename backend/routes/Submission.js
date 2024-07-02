@@ -216,6 +216,14 @@ router.post("/submit", async (req, res) => {
           filePath,
           inputFilePath
         );
+        // let actualOutput;
+        // try {
+        //   actualOutput = await executeCode(language, filePath, inputFilePath);
+        //   //res.json({ filePath, inputPath, output });
+        // } catch (error) {
+        //   console.error("Error executing code in index: 1", error);
+        //   res.status(500).json({ error: error.message });
+        // }
 
         if (actualOutput.trim() !== expectedOutput.trim()) {
           console.log(`Test case ${i + 1} failed`);
@@ -332,7 +340,29 @@ router.post("/submit", async (req, res) => {
   }
 });
 
+// Endpoint to get the verdict for a specific user and problem
+router.get("/verdict/:userId/:problemId", async (req, res) => {
+  const { userId, problemId } = req.params;
+  try {
+    const submission = await Submission.findOne({
+      user: userId,
+      problem: problemId,
+    }).sort({ createdAt: -1 }); // Get the latest submission
+
+    if (!submission) {
+      return res.status(404).json({ verdict: "Unsolved" });
+    }
+
+    const verdict = submission.verdict === "Accepted" ? "Solved" : "Unsolved";
+    res.status(200).json({ verdict });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;
+
+//module.exports = router;
 
 // const express = require("express");
 // const { generateFile } = require("../../compiler/generateFile");

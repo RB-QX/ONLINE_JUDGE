@@ -57,12 +57,14 @@ const executeC = (filePath, inputPath) => {
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
-        return reject({ error: error.message, stderr });
+        //console.error("Compilation error:", error);
+        reject(new Error(`Compilation error: ${error.message}`));
+      } else if (stderr) {
+        // console.error("Runtime Error:", stderr);
+        reject(new Error(`Runtime error: ${stderr}`));
+      } else {
+        resolve(stdout);
       }
-      if (stderr) {
-        return reject(stderr);
-      }
-      resolve(stdout);
     });
   });
 };

@@ -16,13 +16,24 @@ const executeCpp = (filepath, inputPath) => {
     exec(
       `g++ ${filepath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.out < ${inputPath}`,
       (error, stdout, stderr) => {
+        // if (error) {
+        //   console.error("Compilation error1:", error);
+        //   reject({ error, stderr });
+        // }
+        // if (stderr) {
+        //   //console.error("Compilation stderr:", stderr);
+        //   reject({ error: "Compilation error2", stderr });
+        // }
+        // resolve(stdout);
         if (error) {
-          reject({ error, stderr });
+          //console.error("Compilation error:", error);
+          reject(new Error(`Compilation error: ${error.message}`));
+        } else if (stderr) {
+          // console.error("Runtime Error:", stderr);
+          reject(new Error(`Runtime error: ${stderr}`));
+        } else {
+          resolve(stdout);
         }
-        if (stderr) {
-          reject(stderr);
-        }
-        resolve(stdout);
       }
     );
   });

@@ -33,14 +33,14 @@ app.post("/run", async (req, res) => {
 
     // Execute code using executeCode function
 
-    console.log(inputPath);
+    //console.log(inputPath);
     const output = await executeCode(language, filePath, inputPath);
     /// const output = await executeCode(filePath,language,  input);
-    //console.log(output);
+    //console.log("indexoutput", output);
     // Return response with file paths and output
     res.json({ filePath, inputPath, output });
   } catch (error) {
-    console.error("Error executing code:", error.messsage);
+    console.error("Error executing code in index: 1", error);
     res.status(500).json({ error: error.message });
   }
 });

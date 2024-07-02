@@ -74,7 +74,7 @@ function NormalCodeEditor({ problemId, userId }) {
       alert("You must be logged in to submit code.");
       return;
     }
-    const userId = localStorage.getItem("userId") || ""; // Default to empty string if undefined
+
     const payload = {
       userId,
       problemId,
@@ -82,19 +82,22 @@ function NormalCodeEditor({ problemId, userId }) {
       language,
       input,
     };
-    console.log(userId);
+
     try {
-      //const { data } = await axios.post("http://localhost:5000/run", payload);
       const { data } = await axios.post("http://localhost:5000/run", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
-      setOutput(data.output);
+
+      if (data.error) {
+        setOutput(data.error.error); // Display compilation error to the user
+      } else {
+        setOutput(data.output); // Display normal output
+      }
     } catch (error) {
-      console.error("Error running code:", error.response);
-      setOutput(error.response?.data?.error.stderr || "Error running code");
+      console.error("Error running code:", error);
+      setOutput(error.response?.data?.error || "Error running code");
     }
   };
 

@@ -85,14 +85,13 @@ function CodeEditor({ problemId, userId }) {
     setOutput("");
     //setVerdict("");
   };
-
   const handleRun = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("You must be logged in to submit code.");
       return;
     }
-    console.log(userId);
+
     const payload = {
       userId,
       problemId,
@@ -102,18 +101,23 @@ function CodeEditor({ problemId, userId }) {
     };
 
     try {
-      //const { data } = await axios.post("http://localhost:5000/run", payload);
       const { data } = await axios.post("http://localhost:5000/run", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setOutput(data.output);
+
+      if (data.error) {
+        setOutput(data.error.error); // Display compilation error to the user
+      } else {
+        setOutput(data.output); // Display normal output
+      }
     } catch (error) {
-      console.error("Error running code:", error.response);
-      setOutput(error.response?.data?.error.stderr || "Error running code");
+      console.error("Error running code:", error);
+      setOutput(error.response?.data?.error || "Error running code");
     }
   };
+
   const handleSubmitCode = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -151,7 +155,7 @@ function CodeEditor({ problemId, userId }) {
       }
     } catch (error) {
       console.error("Error submitting code:", error);
-      setOutput("Error submitting code");
+      setOutput(error.response);
     }
   };
 
