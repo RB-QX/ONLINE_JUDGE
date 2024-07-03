@@ -20,7 +20,7 @@ app.post("/run", async (req, res) => {
   const { language, code, input } = req.body;
 
   if (!code) {
-    return res.status(400).json({ success: false, error: "Empty code!" });
+    return res.status(200).json({ success: false, error: "Empty code!" });
   }
 
   try {
@@ -40,7 +40,7 @@ app.post("/run", async (req, res) => {
     // Return response with file paths and output
     res.json({ filePath, inputPath, output });
   } catch (error) {
-    console.error("Error executing code in index: 1", error);
+    //console.error("Error executing code in index: 1", error);
     res.status(500).json({ error: error.message });
   }
 });

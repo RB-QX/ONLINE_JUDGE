@@ -96,7 +96,7 @@ function NormalCodeEditor({ problemId, userId }) {
         setOutput(data.output); // Display normal output
       }
     } catch (error) {
-      console.error("Error running code:", error);
+      // console.error("Error running code:", error);
       setOutput(error.response?.data?.error || "Error running code");
     }
   };
