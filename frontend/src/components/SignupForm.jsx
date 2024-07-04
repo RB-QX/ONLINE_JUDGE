@@ -107,7 +107,7 @@ const SignupForm = () => {
           User
         </button>
 
-        <button
+        {/* <button
           className={`${
             accountType === "admin"
               ? "bg-richblack-900 text-richblack-5"
@@ -116,7 +116,7 @@ const SignupForm = () => {
           onClick={() => setAccountType("admin")}
         >
           Admin
-        </button>
+        </button> */}
       </div>
       <form onSubmit={submitHandler}>
         {/* first name and lastName */}
