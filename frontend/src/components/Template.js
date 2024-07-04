@@ -15,7 +15,7 @@ const Template = ({ title, desc1, desc2, formtype, setIsLoggedIn }) => {
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>wELCOE TO OJ!</h1>
+  <h1>WELCOME TO CODE INNOVATE AND GROW!</h1>
 </body>
 </html>
 `;
