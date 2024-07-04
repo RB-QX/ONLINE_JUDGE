@@ -101,11 +101,15 @@ function CodeEditor({ problemId, userId }) {
     };
 
     try {
-      const { data } = await axios.post("http://localhost:5000/run", payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.post(
+        "http://13.234.37.120:5000/run",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (data.error) {
         setOutput(data.error.error); // Display compilation error to the user
