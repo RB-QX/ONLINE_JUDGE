@@ -98,13 +98,16 @@ function ForgotPassword() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8000/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}forgot-password`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       setLoading(false);
 

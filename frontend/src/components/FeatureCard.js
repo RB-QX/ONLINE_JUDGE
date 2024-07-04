@@ -9,4 +9,5 @@ const FeatureCard = ({ title, description }) => {
   );
 };
 
-export default FeatureCard; // Ensure you are exporting the component like this
+export default FeatureCard;
+s;
