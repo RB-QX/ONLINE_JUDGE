@@ -9,7 +9,9 @@ const DeleteProblem = () => {
   // Fetch problems from the server
   const fetchProblems = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/allproblems");
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}allproblems`
+      );
       if (response.status === 200) {
         setProblems(response.data);
       } else {
@@ -37,7 +39,7 @@ const DeleteProblem = () => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:8000/delete-problem/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}delete-problem/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

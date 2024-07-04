@@ -7,6 +7,7 @@ import "prismjs/components/prism-c";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-java";
 import "prismjs/themes/prism.css";
+import "prismjs/components/prism-cpp";
 import axios from "axios";
 
 const starterCodes = {
@@ -55,28 +56,28 @@ function CodeEditor({ problemId, userId }) {
   const [input, setInput] = useState("");
   //const [verdict, setVerdict] = useState("");
 
-  useEffect(() => {
-    const fetchSavedCode = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/get-code", {
-          params: { userId, problemId, language },
-        });
-        if (response.status === 200) {
-          setCode(response.data.code);
-          //setLanguage(response.data.language);
-        } else {
-          // Default to starter code based on selected language
-          console.log("error status not 200");
-          setCode(starterCodes[language]);
-        }
-      } catch (error) {
-        console.log("error in fetching code");
-        console.error("Error fetching saved code:", error.message);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchSavedCode = async () => {
+  //     try {
+  //       const response = await axios.get(`https://localhost:8000/get-code`, {
+  //         params: { userId, problemId, language },
+  //       });
+  //       if (response.status === 200) {
+  //         setCode(response.data.code);
+  //         //setLanguage(response.data.language);
+  //       } else {
+  //         // Default to starter code based on selected language
+  //         console.log("error status not 200");
+  //         setCode(starterCodes[language]);
+  //       }
+  //     } catch (error) {
+  //       console.log("error in fetching code");
+  //       console.error("Error fetching saved code:", error.message);
+  //     }
+  //   };
 
-    fetchSavedCode();
-  }, [problemId, userId, language]);
+  //   fetchSavedCode();
+  // }, [problemId, userId, language]);
 
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
@@ -138,13 +139,16 @@ function CodeEditor({ problemId, userId }) {
       isSubmit: true, // Set isSubmit to true for submit operation
     };
     try {
-      const response = await fetch("http://localhost:8000/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}submit`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
 
@@ -177,7 +181,10 @@ function CodeEditor({ problemId, userId }) {
     };
 
     try {
-      await axios.post("http://localhost:8000/save-code", payload);
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}save-code`,
+        payload
+      );
       console.log("Code saved successfully");
     } catch (error) {
       console.error("Error saving code:", error.message);
@@ -206,7 +213,8 @@ function CodeEditor({ problemId, userId }) {
           value={code}
           onValueChange={(code) => setCode(code)}
           highlight={(code) =>
-            highlight(code, languages[language] || languages.js)
+            //highlight(code, languages[language] || languages.js)
+            highlight(code || "", languages[language] || languages.js)
           }
           padding={10}
           style={{

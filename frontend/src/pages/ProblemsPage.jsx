@@ -142,9 +142,9 @@ const ProblemsPage = () => {
 
   useEffect(() => {
     const fetchProblems = async () => {
-      let url = "http://localhost:8000/allproblems";
+      let url = `${process.env.REACT_APP_BACKEND_URL}allproblems`;
       if (difficulty) {
-        url = `http://localhost:8000/problemsdifficulty?difficulty=${difficulty}`;
+        url = `${process.env.REACT_APP_BACKEND_URL}problemsdifficulty?difficulty=${difficulty}`;
       }
       try {
         const response = await fetch(url);
@@ -169,7 +169,7 @@ const ProblemsPage = () => {
         for (const problem of problems) {
           try {
             const response = await fetch(
-              `http://localhost:8000/verdict/${userId}/${problem._id}`
+              `${process.env.REACT_APP_BACKEND_URL}verdict/${userId}/${problem._id}`
             );
             if (response.ok) {
               const data = await response.json();

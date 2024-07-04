@@ -65,7 +65,7 @@ function ResetPassword() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/reset-password/${id}/${token}`,
+        `${process.env.REACT_APP_BACKEND_URL}reset-password/${id}/${token}`,
         {
           method: "POST",
           headers: {

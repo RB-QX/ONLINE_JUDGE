@@ -54,19 +54,22 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstname: formData.firstName,
-          lastname: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-          role: accountType,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstname: formData.firstName,
+            lastname: formData.lastName,
+            email: formData.email,
+            password: formData.password,
+            role: accountType,
+          }),
+        }
+      );
 
       const data = await response.json();
 

@@ -135,7 +135,8 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-
+  //const baseurl = process.env.REACT_APP_BACKEND_URL;
+  console.log("hii", baseurl);
   const [showPassword, setShowPassword] = useState(false);
 
   function changeHandler(event) {
@@ -149,17 +150,21 @@ const LoginForm = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      //const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -181,7 +186,7 @@ const LoginForm = () => {
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.");
-      console.error("Login error: ", error);
+      //console.error("Login error: ", error);
     }
   }
 

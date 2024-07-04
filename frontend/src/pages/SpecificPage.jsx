@@ -14,7 +14,7 @@ const SpecificPage = () => {
     const fetchProblem = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/allproblems/${id}`
+          `${process.env.REACT_APP_BACKEND_URL}allproblems/${id}`
         );
         if (response.status === 200) {
           setProblem(response.data);

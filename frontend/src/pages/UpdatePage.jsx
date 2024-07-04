@@ -293,7 +293,7 @@ const UpdateProblem = () => {
     const fetchProblem = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/allproblems/${id}`
+          `${process.env.REACT_APP_BACKEND_URL}allproblems/${id}`
         );
         if (response.status === 200) {
           setProblem(response.data);
@@ -315,7 +315,7 @@ const UpdateProblem = () => {
     event.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:8000/allproblems/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}allproblems/${id}`,
         problem
       );
       if (response.status === 200) {
@@ -331,7 +331,7 @@ const UpdateProblem = () => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/allproblems/${id}`
+        `${process.env.REACT_APP_BACKEND_URL}allproblems/${id}`
       );
       if (response.status === 200) {
         alert("Problem deleted successfully");

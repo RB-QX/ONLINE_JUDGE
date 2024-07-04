@@ -36,13 +36,16 @@ const AddContestProblem = ({ isLoggedIn }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/addcontestproblem", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(problem),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}addcontestproblem`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(problem),
+        }
+      );
 
       if (response.ok) {
         alert("Problem added successfully");
