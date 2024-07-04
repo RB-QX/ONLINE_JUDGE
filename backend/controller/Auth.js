@@ -126,7 +126,7 @@ exports.forgotpassword = async (req, res) => {
       subject: "Reset Password Link",
       //text: `Click the following link to reset your password: http://localhost:8000/reset_password/${user._id}/${token}`,
       html: `<p>You requested a password reset</p>
-      <p>Click this <a href="http://localhost:3000/reset-password/${user._id}/${token}">link</a> to reset your password</p>`,
+      <p>Click this <a href="https://online-judge-bice.vercel.app/reset-password/${user._id}/${token}">link</a> to reset your password</p>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
