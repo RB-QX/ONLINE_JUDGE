@@ -22,7 +22,7 @@ app.use(cookieParser());
 DBConnection();
 app.use(
   cors({
-    origin: "http://localhost:3000", // replace with your frontend domain
+    origin: "https://online-judge-thmb.vercel.app/", // replace with your frontend domain
     credentials: true,
   })
 );
