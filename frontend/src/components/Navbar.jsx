@@ -351,10 +351,10 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className=" md:hidden sm:flex sm:flex-row items-center gap-x-4">
+        <div className=" md:hidden flex flex-col  gap-x-4">
           {!isLoggedIn ? (
             <>
-              <Link to="/login">
+              <Link to="/login" onClick={() => setMenuOpen(false)}>
                 <button
                   className="bg-richblack-800 text-richblack-100 py-[8px]
                       px-[12px] rounded-[8px] border border-richblack-700"
@@ -362,7 +362,7 @@ const Navbar = () => {
                   Log in
                 </button>
               </Link>
-              <Link to="/register">
+              <Link to="/register" onClick={() => setMenuOpen(false)}>
                 <button
                   className="bg-richblack-800 text-richblack-100 py-[8px]
                       px-[12px] rounded-[8px] border border-richblack-700"
@@ -373,7 +373,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link to="/">
+              <Link to="/" onClick={() => setMenuOpen(false)}>
                 <button
                   onClick={handleLogout}
                   className="bg-richblack-800 text-richblack-100 py-[8px]
@@ -383,7 +383,7 @@ const Navbar = () => {
                 </button>
               </Link>
               {userRole === "admin" && (
-                <Link to="/dashboard">
+                <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
                   <button
                     className="bg-richblack-800 text-richblack-100 py-[8px]
                         px-[12px] rounded-[8px] border border-richblack-700"
@@ -393,7 +393,7 @@ const Navbar = () => {
                 </Link>
               )}
               {userRole === "user" && (
-                <Link to="/profile">
+                <Link to="/profile" onClick={() => setMenuOpen(false)}>
                   <button
                     className="bg-richblack-800 text-richblack-100 py-[8px]
                         px-[12px] rounded-[8px] border border-richblack-700"
@@ -405,6 +405,11 @@ const Navbar = () => {
             </>
           )}
         </div>
+        <li className="md:hidden gap-x-4">
+          <Link to="/" onClick={() => setMenuOpen(false)}>
+            Back
+          </Link>
+        </li>
 
         {/* Logged-in User Actions */}
         {/* <div className="hidden md:flex items-center gap-x-4">
