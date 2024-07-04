@@ -20,12 +20,29 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 //app.use(cors());
 DBConnection();
+const allowedOrigins = [
+  "http://localhost:3000", // Local development
+  "https://online-judge-thmb-git-main-riturajs-projects-9d93cf1b.vercel.app/", // Production
+];
+
 app.use(
   cors({
-    origin: "https://online-judge-thmb.vercel.app/", // replace with your frontend domain
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin: "https://online-judge-thmb.vercel.app/", // replace with your frontend domain
+//     credentials: true,
+//   })
+// );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
