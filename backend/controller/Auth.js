@@ -8,7 +8,6 @@ dotenv.config();
 //const cookieparser = require("cookie-parser");
 
 exports.signup = async (req, res) => {
-  console.log(req.body);
   try {
     const { firstname, lastname, email, password, role } = req.body;
 
@@ -42,7 +41,6 @@ exports.signup = async (req, res) => {
     user.token = token;
     user.password = undefined;
 
-    console.log(token);
     res.status(200).json({
       message: "Successfully registered",
       user,
