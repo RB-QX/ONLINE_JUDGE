@@ -22,7 +22,7 @@ app.use(cookieParser());
 DBConnection();
 const allowedOrigins = [
   "http://localhost:3000", // Local development
-  "https://online-judge-thmb-git-main-riturajs-projects-9d93cf1b.vercel.app/", // Production
+  "https://online-judge-bice.vercel.app/", // Production
 ];
 
 app.use(
