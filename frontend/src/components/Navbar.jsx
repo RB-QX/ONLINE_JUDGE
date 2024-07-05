@@ -268,6 +268,15 @@ const Navbar = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const userRole = localStorage.getItem("role");
   const [menuOpen, setMenuOpen] = useState(false);
+  const typingAnimation = {
+    display: "inline-block",
+  };
+
+  const spanStyles = {
+    opacity: 1,
+    animation: "typing 1s forwards",
+    color: "#f15f79",
+  };
 
   const handleLogout = () => {
     localStorage.clear();

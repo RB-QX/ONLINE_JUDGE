@@ -24,7 +24,8 @@ const CursorFollowDiv = () => {
 
   return (
     <div
-      className="flex items-center justify-center relative border-2 border-transparent transition-all duration-200 ease-linear overflow-hidden shadow-inner inter-var w-3/4 sm:w-2/3 md:w-1/2 lg:w-full mx-auto rounded-3xl"
+      className="flex items-center justify-center relative border-2 border-transparent transition-all duration-200 ease-linear overflow-hidden shadow-inner inter-var w-3/4 sm:w-2/3 md:w-1/2 lg:w-11/12
+       mx-auto rounded-3xl"
       style={{
         transformStyle: "preserve-3d",
         position: "relative",
@@ -46,7 +47,7 @@ const CursorFollowDiv = () => {
                   Compiler
                 </p>
                 <p className="text-white font-semibold text-4xl">
-                  Code On-the-Go with Quick Compiler
+                  Experience Coding Like Never Before !
                 </p>
               </div>
               <p className="text-base text-white font-medium">
