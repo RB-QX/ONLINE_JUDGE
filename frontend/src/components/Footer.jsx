@@ -5,7 +5,10 @@ const Footer = ({ footerLinks }) => {
   return (
     <footer className="bg-gray-200 text-gray-600 py-4">
       <div className="container mx-auto px-4 text-center">
-        <p>&copy; 2024 DSA Problem Solver. All rights reserved.</p>
+        <p>
+          &copy; 2024 DSA Problem Solver. All rights reserved. Made By Ritu Raj
+          Prasad
+        </p>
         <div className="mt-2">
           {footerLinks.map((link, index) => (
             <React.Fragment key={index}>
