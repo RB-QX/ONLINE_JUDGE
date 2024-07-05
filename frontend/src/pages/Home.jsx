@@ -6,12 +6,14 @@ import FeatureCard from "../components/FeatureCard";
 import WhyChooseUsCard from "../components/WhyChooseUsCard";
 import Footer from "../components/Footer";
 import data from "../assets/data.json";
+import CursorFollowDiv from "../components/CursorFollowDiv";
 
 const Home = () => {
   const { topics, features, whyChooseUs, footerLinks } = data;
 
   return (
     <div className="bg-richblack-800">
+      <CursorFollowDiv />
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Explore Topics */}

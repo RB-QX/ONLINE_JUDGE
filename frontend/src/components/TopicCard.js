@@ -9,4 +9,4 @@ const TopicCard = ({ title, description }) => {
   );
 };
 
-export default TopicCard; // Ensure you are exporting the component like this
+export default TopicCard;
