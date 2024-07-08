@@ -13,6 +13,7 @@ const executeCpp = (filepath, inputPath) => {
   const outPath = path.join(outputPath, `${jobId}.out`);
 
   return new Promise((resolve, reject) => {
+    //const exactfile = `${jobId}.out`;
     exec(
       `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}.out < ${inputPath}`,
       (error, stdout, stderr) => {
