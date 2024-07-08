@@ -20,9 +20,13 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 //app.use(cors());
 DBConnection();
+// const allowedOrigins = [
+//   "http://localhost:3000", // Local development
+//   "https://online-judge-i86h.vercel.app", // Production
+// ];
 const allowedOrigins = [
   "http://localhost:3000", // Local development
-  "https://online-judge-i86h.vercel.app", // Production
+  "https://codeinnovate.tech", // Production
 ];
 
 app.use(
