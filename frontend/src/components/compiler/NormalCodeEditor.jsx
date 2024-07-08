@@ -85,7 +85,7 @@ function NormalCodeEditor({ problemId, userId }) {
 
     try {
       const { data } = await axios.post(
-        "http://13.234.37.120:5000/run",
+        "https://compiler.codeinnovate.tech/run",
         payload,
         {
           headers: {
